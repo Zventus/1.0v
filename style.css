@@ -1,0 +1,49 @@
+body {
+    background: #281f69;
+    padding: 0px;
+    margin: 0px;
+  }
+
+img {   
+    /* display: block;
+    margin-left: auto;
+    margin-right: 700px; */
+    /* margin-right: auto; */
+    width: 30%;
+    }
+
+/* #user_div {
+    display: none;
+} */
+
+/* .purple {
+    background-color:  #7300e6
+} */
+
+/* #main_div {
+    display: none;
+} */
+
+#dropdownMenuButton {
+    margin-left: 95.5px;
+
+}
+
+/* This is for the email and password */
+.form-inline {
+    margin-left: 400px;
+}
+
+.btn.btn-info {
+    background: #e0cc21;
+}
+
+.navbar {
+    background: #3a6eb4;
+    border-width: 100px;
+}
+
+.btn.btn-secondary {
+    position: relative;
+    /* display: none; */
+}
