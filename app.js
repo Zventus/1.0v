@@ -23,6 +23,7 @@ var config = {
 //************First of all we need a boolean to keep track of our timer state- global variables  -------- &&&&&&&&&&&&
  var active = false;
  var active2 = false;
+ var active3 = false;
 console.log("act", active);
 console.log("lunch", active2);
 //******************************************************************************************
@@ -84,6 +85,34 @@ function start_timer2() {
      setTimeout(start_timer2, 1000); // keep repeating with the speed of 1 sec
     }
 }
+
+function start_timer3() {
+  if (active3) {
+      var timer = document.getElementById("my_timer3").innerHTML;
+      var arr = timer.split(":");
+      var hour = arr[0]; // getting hour
+      var min = arr[1];  // minutes
+      var sec = arr[2]; // seconds
+
+      if (sec == 59) {
+          if (min == 59) {
+           hour++;
+           min = 0;
+           if (hour < 10) hour = "0" + hour;
+  } else { 
+      min++;
+      }
+      if (min < 10) min = "0" + min;
+      sec = 0;
+     } else {
+         sec ++;
+         if (sec < 10) sec = "0" + sec;
+   }
+   // update our html
+   document.getElementById("my_timer3").innerHTML = hour + ":" + min + ":"+ sec;
+   setTimeout(start_timer3, 1000); // keep repeating with the speed of 1 sec
+  }
+}
 //*************************************************Change state functions************************** */
 // now we need function to change states - start or pause timer by clicking
 function changeState() {
@@ -107,11 +136,23 @@ function changeState2() {
     console.log("timmer is on pause");
    }
 }
+
+function changeState3() {
+  if (active3 == false) {
+     active3 = true;
+     start_timer3();
+     console.log("Timer has been started");
+ } else {
+ active = false;
+  console.log("timmer is on pause");
+ }
+}
 //*************************************************************************************************** */
 // finally our reset function 
 function reset() {
     // captureAct();
     document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
     console.log("Timer has been reseted")
 }
 //***************************EXPERIMENT *****************************************************/
@@ -125,7 +166,7 @@ function captureAct() {
     console.log(name2);
 // var agentName = document.getElementById("password").value;
     var washingtonRef2 = db.collection("users").doc(name2);
-// Set the "capital" field of the city 'DC'
+// Update time 
 return washingtonRef2.update({
     // name: name,
     active: act
@@ -169,13 +210,20 @@ function captureLunch () {
 //  });
 }
 
+function captureBreak () {
+  console.log(active3);
+  // active3 = true; 
+   changeState3(); 
+  // console.log(active2);
 
+   active = false;  
+}
 //************************log in****************************************/
 
 function login() {
     console.log("work")
- var email2 = document.getElementById("email2").value;
- var password2 = document.getElementById("password2").value;
+  var email2 = document.getElementById("email2").value;
+  var password2 = document.getElementById("password2").value;
     
     firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function (error) {
 // Handle Errors here.
@@ -234,9 +282,7 @@ function logout(){
 //********************************************************************* */
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-
       // User is signed in.
-        
       document.getElementById("user_div").style.display = "block";
       document.getElementById("test").style.display = "none";
       
@@ -254,7 +300,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       document.getElementById("test").style.display = "block";
      }
   });
-
+//----------------------------------------------------------------------------------------------
   function register() {
       console.log("works")
     var email = document.getElementById("email").value;
@@ -276,41 +322,26 @@ firebase.auth().onAuthStateChanged(function(user) {
  });
 register2();
 }
-
+//-------------------------------------------------------------------------------------
 function register2() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var name = document.getElementById('name').value;
-    // var timer1 = document.getElementById('my_timer');
-  db.collection("users").doc(email).set({
-    name: name,
-    email: email,
-    password: password
-  })
- .then(function(docRef) {
-  console.log("Document written with ID: ", docRef.id);
-  document.getElementById('email').value = '';
-  document.getElementById('password').value = '';
-  document.getElementById('name').value = '';
- })
+      db.collection("users").doc(email).set({
+        name: name,
+        email: email,
+        password: password
+      })
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('name').value = '';
+    })
  .catch(function(error) {
   console.error("Error adding document: ", error);
-    });
-  }
-
-
-
-
-var user = firebase.auth().currentUser;
-var name, email, photoUrl, uid, emailVerified;
-
-if (user != null) {
-  name = user.displayName;
-//   email = user.email;
-//   photoUrl = user.photoURL;
-//   emailVerified = user.emailVerified;
-//   uid = user.uid; 
-console.log(name);
+  });
 }
+
 
   
