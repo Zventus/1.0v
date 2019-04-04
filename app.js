@@ -10,47 +10,41 @@ var config = {
 
 //********************************GLOBAL VARiables ********************/
    var db = firebase.firestore();
-//     var agentName = document.getElementById("password").value;
+
 //***********Set the document********************************/
-
-
-//*****************************&&&&&&&&&&&&&&&&&&&&&&&&Experiment section&&&&&&&&&&&&&***************************** */
-
-
-
 
 
 //************First of all we need a boolean to keep track of our timer state- global variables  -------- &&&&&&&&&&&&
  var active = false;
  var active2 = false;
  var active3 = false;
-console.log("act", active);
-console.log("lunch", active2);
+ var active4 = false;
+ var active5 = false;
 //******************************************************************************************
 
 // Three function for three timers. Each status has its own count timer
 function start_timer() {
-    // This function will go if active is true
-    if (active) {
-        var timer = document.getElementById("my_timer").innerHTML;
-        var arr = timer.split(":");
-        var hour = arr[0]; // getting hour
-        var min = arr[1];  // minutes
-        var sec = arr[2]; // seconds
+  // This function will go if active is true
+  if (active) {
+    var timer = document.getElementById("my_timer").innerHTML;
+    var arr = timer.split(":");
+    var hour = arr[0]; // getting hour
+    var min = arr[1];  // minutes
+    var sec = arr[2]; // seconds
 
-        if (sec == 59) {
-            if (min == 59) {
-             hour++;
-             min = 0;
-             if (hour < 10) hour = "0" + hour;
+  if (sec == 59) {
+    if (min == 59) {
+      hour++;
+      min = 0;
+     if (hour < 10) hour = "0" + hour;
     } else { 
-        min++;
+      min++;
         }
         if (min < 10) min = "0" + min;
         sec = 0;
        } else {
            sec ++;
-           if (sec < 10) sec = "0" + sec;
+          if (sec < 10) sec = "0" + sec;
      }
      // update our html
      document.getElementById("my_timer").innerHTML = hour + ":" + min + ":"+ sec;
@@ -113,6 +107,68 @@ function start_timer3() {
    setTimeout(start_timer3, 1000); // keep repeating with the speed of 1 sec
   }
 }
+
+function start_timer4() {
+  // This function will go if active is true
+  if (active4) {
+    var timer = document.getElementById("my_timer4").innerHTML;
+    var arr = timer.split(":");
+    var hour = arr[0]; // getting hour
+    var min = arr[1];  // minutes
+    var sec = arr[2]; // seconds
+
+  if (sec == 59) {
+    if (min == 59) {
+      hour++;
+      min = 0;
+     if (hour < 10) hour = "0" + hour;
+    } else { 
+      min++;
+        }
+        if (min < 10) min = "0" + min;
+        sec = 0;
+       } else {
+           sec ++;
+          if (sec < 10) sec = "0" + sec;
+     }
+     // update our html
+     document.getElementById("my_timer4").innerHTML = hour + ":" + min + ":"+ sec;
+     setTimeout(start_timer4, 1000); // keep repeating with the speed of 1 sec
+    }
+}
+
+function start_timer5() {
+  // This function will go if active is true
+  if (active5) {
+    var timer = document.getElementById("my_timer5").innerHTML;
+    var arr = timer.split(":");
+    var hour = arr[0]; // getting hour
+    var min = arr[1];  // minutes
+    var sec = arr[2]; // seconds
+
+  if (sec == 59) {
+    if (min == 59) {
+      hour++;
+      min = 0;
+     if (hour < 10) hour = "0" + hour;
+    } else { 
+      min++;
+        }
+        if (min < 10) min = "0" + min;
+        sec = 0;
+       } else {
+           sec ++;
+          if (sec < 10) sec = "0" + sec;
+     }
+     // update our html
+     document.getElementById("my_timer5").innerHTML = hour + ":" + min + ":"+ sec;
+     setTimeout(start_timer5, 1000); // keep repeating with the speed of 1 sec
+    }
+}
+
+
+
+
 //*************************************************Change state functions************************** */
 // now we need function to change states - start or pause timer by clicking
 function changeState() {
@@ -147,6 +203,31 @@ function changeState3() {
   console.log("timmer is on pause");
  }
 }
+
+function changeState4() {
+  if (active4 == false) {
+     active4 = true;
+     start_timer4();
+     console.log("Timer has been started");
+ } else {
+ active4 = false;
+  console.log("timmer is on pause");
+ }
+}
+
+function changeState5() {
+  if (active5 == false) {
+     active5 = true;
+     start_timer5();
+     console.log("Timer has been started");
+ } else {
+ active = false;
+  console.log("timmer is on pause");
+ }
+}
+
+
+
 //*************************************************************************************************** */
 // finally our reset function 
 function reset() {
@@ -158,7 +239,10 @@ function reset() {
 //***************************EXPERIMENT *****************************************************/
 function captureAct() {
     changeState();
-    active2 = false;   
+  active2 = false; 
+  active3 = false;
+  active4 = false;
+  active5 = false;  
     var test = document.getElementById("my_timer");
     var act = test.textContent;
     console.log(act);
@@ -186,8 +270,11 @@ function captureLunch () {
     console.log(active2); 
     changeState2(); 
     console.log(active2);
-
-     active = false;   
+  active = false;
+  active3 = false;
+  active4 = false;
+  active5 = false;
+    //  active = false;   
 //     var test = document.getElementById("my_timer2");
 //     var act = test.textContent;
 //     console.log(act);
@@ -215,9 +302,38 @@ function captureBreak () {
   // active3 = true; 
    changeState3(); 
   // console.log(active2);
-
+  active2 = false;
+  // active3 = false;
+  active4 = false;
+  active5 = false;
    active = false;  
 }
+
+function captureTrain () {
+
+  // active3 = true; 
+   changeState4(); 
+  // console.log(active2);
+  active2 = false;
+  active3 = false;
+  // active4 = false;
+  active5 = false;
+   active = false;  
+}
+
+
+function test3() {
+  console.log(active3);
+  // active3 = true; 
+   changeState5(); 
+  // console.log(active2);
+  active2 = false;
+  active3 = false;
+  active4 = false;
+  // active5 = false;
+   active = false;  
+}
+
 //************************log in****************************************/
 
 function login() {
