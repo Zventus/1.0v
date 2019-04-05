@@ -11,9 +11,6 @@ var config = {
 //********************************GLOBAL VARiables ********************/
    var db = firebase.firestore();
 
-//***********Set the document********************************/
-
-
 //************First of all we need a boolean to keep track of our timer state- global variables  -------- &&&&&&&&&&&&
  var active = false;
  var active2 = false;
@@ -21,7 +18,6 @@ var config = {
  var active4 = false;
  var active5 = false;
 //******************************************************************************************
-
 // Three function for three timers. Each status has its own count timer
 function start_timer() {
   // This function will go if active is true
@@ -181,7 +177,7 @@ function changeState() {
      console.log("timmer is on pause");
     }
 }
-//********************************************************************************************************* */
+
 function changeState2() {
     if (active2 == false) {
        active2 = true;
@@ -234,67 +230,28 @@ function reset() {
     // captureAct();
     document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
     document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
-    console.log("Timer has been reseted")
+    document.getElementById("my_timer3").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer4").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer5").innerHTML = "00" + ":" + "00" + ":" + "00";
+    // console.log("Timer has been reseted")
 }
 //***************************EXPERIMENT *****************************************************/
 function captureAct() {
-    changeState();
+  // changeState();
+  
   active2 = false; 
   active3 = false;
   active4 = false;
   active5 = false;  
-    var test = document.getElementById("my_timer");
-    var act = test.textContent;
-    console.log(act);
-    var name2 = document.getElementById("email2").value;
-    console.log(name2);
-// var agentName = document.getElementById("password").value;
-    var washingtonRef2 = db.collection("users").doc(name2);
-// Update time 
-return washingtonRef2.update({
-    // name: name,
-    active: act
-  })
-.then(function() {
-    // continuee(act);
-    console.log("Document successfully updated!");
- })
-.catch(function(error) {
-    // The document probably doesn't exist.
-    console.error("Error updating document: ", error);
- });
 }
-
 //---------------------------------------------------------------------
-function captureLunch () {
-    console.log(active2); 
+function captureLunch () { 
     changeState2(); 
-    console.log(active2);
-  active = false;
+    console.log("After changeState2 function:", active2);
+  // active = false;
   active3 = false;
   active4 = false;
   active5 = false;
-    //  active = false;   
-//     var test = document.getElementById("my_timer2");
-//     var act = test.textContent;
-//     console.log(act);
- 
-//     var agentName = document.getElementById("password").value;
-//     var washingtonRef2 = db.collection("users").doc(agentName);
-
-// // Set the "capital" field of the city 'DC'
-// return washingtonRef2.update({
-//     name: "edward",
-//     lunch: act
-//   })
-// .then(function() {
-//     // continuee(act);
-//     console.log("Document successfully updated!");
-//  })
-// .catch(function(error) {
-//     // The document probably doesn't exist.
-//     console.error("Error updating document: ", error);
-//  });
 }
 
 function captureBreak () {
@@ -330,17 +287,14 @@ function test3() {
   active2 = false;
   active3 = false;
   active4 = false;
-  // active5 = false;
-   active = false;  
+  active = false;  
 }
 
 //************************log in****************************************/
 
 function login() {
-    console.log("work")
   var email2 = document.getElementById("email2").value;
-  var password2 = document.getElementById("password2").value;
-    
+  var password2 = document.getElementById("password2").value;  
     firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function (error) {
 // Handle Errors here.
   var errorCode = error.code;
@@ -349,8 +303,9 @@ function login() {
     console.log(errorMessage);
     console.log("active user");
 // ...
-    });
-    changeState();
+  });
+  // changeState();
+  setTimeout(changeState, 1000);
 }
     observer();
 
@@ -361,7 +316,6 @@ if (user) {
     //   appear(user);
     var displayName = user.displayName;
     var email = user.email;
-    //   console.log(user.emailVerified)
     var emailVerified = user.emailVerified;
     var photoURL = user.photoURL;
     var isAnonymous = user.isAnonymous;
@@ -375,8 +329,6 @@ if (user) {
         }
     });  
 }
-//**********Looks like doesn't work******************************** */
-
 
 //**************************************************************** */
 function verify() {
@@ -391,10 +343,55 @@ function verify() {
 }
 //************************log out*************************************** */
 function logout(){
-    // changeState();
-    firebase.auth().signOut();
-    reset();
-  }
+// TIMER VARIABLES
+    var test = document.getElementById("my_timer");
+    var act = test.textContent;
+    var test2 = document.getElementById("my_timer2");
+    var act2 = test2.textContent;
+    var test3 = document.getElementById("my_timer3");
+    var act3 = test3.textContent;
+    var test4 = document.getElementById("my_timer4");
+    var act4 = test4.textContent;
+    var test5 = document.getElementById("my_timer5");
+    var act5 = test5.textContent;
+      console.log(act,act2,act3,act4,act5)
+    var name2 = document.getElementById("email2").value;
+    var washingtonRef2 = db.collection("users").doc(name2);
+
+// Update time 
+  return washingtonRef2.update({
+// name: name,
+    active: act,
+    lunch: act2,
+    break: act3,
+    train: act4,
+    project: act5
+  })
+.then(function() {
+// continuee(act);
+      console.log("Document successfully updated!");
+resetTest();
+ firebase.auth().signOut();
+})
+.catch(function(error) {
+// The document probably doesn't exist.
+    console.error("Error updating document: ", error);
+});
+}
+
+function resetTest() {
+  document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
+document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
+document.getElementById("my_timer3").innerHTML = "00" + ":" + "00" + ":" + "00";
+document.getElementById("my_timer4").innerHTML = "00" + ":" + "00" + ":" + "00";
+document.getElementById("my_timer5").innerHTML = "00" + ":" + "00" + ":" + "00";
+active = false;
+active2 = false;
+active3 = false;
+active4 = false;
+active5 = false;
+}
+    
 //********************************************************************* */
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -426,7 +423,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function() {
         verify();
-    })
+      })
         .catch(function(error) {
   // Handle Errors here.
         verify();
@@ -435,7 +432,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         console.log(errorCode);
         console.log(errorMessage);
   // ...
- });
+    });
 register2();
 }
 //-------------------------------------------------------------------------------------
@@ -457,7 +454,7 @@ function register2() {
  .catch(function(error) {
   console.error("Error adding document: ", error);
   });
+  console.log(name);
 }
 
 
-  
