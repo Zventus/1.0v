@@ -162,9 +162,6 @@ function start_timer5() {
     }
 }
 
-
-
-
 //*************************************************Change state functions************************** */
 // now we need function to change states - start or pause timer by clicking
 function changeState() {
@@ -222,23 +219,9 @@ function changeState5() {
  }
 }
 
-
-
-//*************************************************************************************************** */
-// finally our reset function 
-function reset() {
-    // captureAct();
-    document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
-    document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
-    document.getElementById("my_timer3").innerHTML = "00" + ":" + "00" + ":" + "00";
-    document.getElementById("my_timer4").innerHTML = "00" + ":" + "00" + ":" + "00";
-    document.getElementById("my_timer5").innerHTML = "00" + ":" + "00" + ":" + "00";
-    // console.log("Timer has been reseted")
-}
 //***************************EXPERIMENT *****************************************************/
 function captureAct() {
   // changeState();
-  
   active2 = false; 
   active3 = false;
   active4 = false;
@@ -278,7 +261,6 @@ function captureTrain () {
    active = false;  
 }
 
-
 function test3() {
   console.log(active3);
   // active3 = true; 
@@ -289,9 +271,7 @@ function test3() {
   active4 = false;
   active = false;  
 }
-
 //************************log in****************************************/
-
 function login() {
   var email2 = document.getElementById("email2").value;
   var password2 = document.getElementById("password2").value;  
