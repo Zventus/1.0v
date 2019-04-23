@@ -18,6 +18,7 @@
 <body>
 <div class=" container mt-3">
   <nav id="color" class="navbar justify-content-between">
+        <!-- <button class="close" type="button">Data</button> -->
     <img src="zventus_white_logo.png" class="">
       <div class=" form-inline"> 
         <input type="text" id="email2" placeholder="email" class="form-control mr-3">
@@ -40,8 +41,7 @@
             <div class="modal-body">
                     <input type="text" id="email" placeholder="email" class="form-control my-3">
                     <input type="text" id="password" placeholder="password" class="form-control my-3">
-                    <input type="text" id="name" placeholder="name" class="form-control my-3">
-            </div>
+                        </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" onclick="register()" class="btn btn-primary">Save changes</button>
@@ -55,7 +55,7 @@
 <div id="user_div" class="alert alert-success mt-4 container" role="alert">
   <div id="test10" class="container"></div>
     <hr>
-      <p class="mt-5">Active: <span id="my_timer" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
+      <p class="mt-5">Total time: <span id="my_timer" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
       <p>Lunch: <span id="my_timer2" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
       <p>Break: <span id="my_timer3" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
       <p>Training: <span id="my_timer4" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
@@ -69,7 +69,7 @@
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Status</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button  id="Active" onclick="captureAct()" class="dropdown-item" href="#">Active</a>
+          <!-- <button  id="Active" onclick="captureAct()" class="dropdown-item" href="#">Active</a> -->
           <button id="At lunch" onclick="captureLunch()" class="dropdown-item" href="#">At Lunch</a>
           <button id="on break" onclick="captureBreak()" class="dropdown-item" href="#">On Break</a>
           <button id="train" onclick="captureTrain()" class="dropdown-item" href="#">Training</a>
@@ -83,8 +83,6 @@
   <h1 class="mt-5">Hello!</h1>
     <hr>
 </div>
-
-  <button type="button" class="btn btn-danger" onclick="test8()" >Give me local time</button>
         
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

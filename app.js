@@ -7,16 +7,122 @@
     messagingSenderId: "712831760132"
 };
   firebase.initializeApp(config);
-//***************s***************** GLOBAL VARIABLES ******************************************/
+//******************************** GLOBAL VARIABLES ******************************************/
    var db = firebase.firestore();
    var user = firebase.auth().currentUser;
    var date = new Date();
+   var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+   var options2 = { hour: 'numeric', minute: 'numeric'};
+   //*******************************************************
+   var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+   var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
    var active  = false;
    var active2 = false;
    var active3 = false;
    var active4 = false;
-   var active5 = false; 
-   var DocRef = db.collection('users'); 
+   var active5 = false;  
+      console.log(resultDate);
+//*******************************************************************************************/
+   function register () {
+    var email    = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function(){
+        verify();
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+            verify();
+      var errorCode = error.code;
+      var errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+      // ...
+    });   
+      // saveData(); // This is the Anonymous function, which creates the registration data.
+}
+//**************************************************************** */
+  function verify() {
+  var user = firebase.auth().currentUser;
+  user.sendEmailVerification().then(function() {
+// Email sent.
+      console.log('sending email...');
+    }).catch(function(error) {
+// An error happened.
+      console.log(error);
+  });   
+}
+  function save () {     
+    var user = firebase.auth().currentUser;
+    var email = user.email; 
+    var test = document.getElementById("my_timer");
+    var act = test.textContent;
+    var test2 = document.getElementById("my_timer2");
+    var act2 = test2.textContent;
+    var test3 = document.getElementById("my_timer3");
+    var act3 = test3.textContent;
+    var test4 = document.getElementById("my_timer4");
+    var act4 = test4.textContent;
+    var test5 = document.getElementById("my_timer5");
+    var act5 = test5.textContent;
+    var DocRef2 = db.collection(resultDate).doc(email);
+      DocRef2.set({  
+          Status: { total: act ,
+          lunch: act2 ,
+          break: act3 , 
+          train: act4 ,
+          project: act5 ,  
+          login: resultTime }
+   }, {merge: true});
+  }
+//*******************************************************************************/
+  function out () {
+      firebase.auth().signOut();
+ }
+  //************************log in/log out****************************************/
+  function login() {
+    var email2    = document.getElementById("email2").value;
+    var password2 = document.getElementById("password2").value;
+    firebase.auth().signInWithEmailAndPassword(email2, password2);  
+      setTimeout(function(){
+        var DocRef2 = db.collection(resultDate).doc(email2);
+        DocRef2.set({  
+            User: { 
+            login: (resultTime)}
+        }, {merge: true});
+    }, 500)   
+}
+//**********************************************************************/
+function logout() {
+  var user = firebase.auth().currentUser;
+    var email = user.email; 
+    var test = document.getElementById("my_timer");
+    var act = test.textContent;
+    var test2 = document.getElementById("my_timer2");
+    var act2 = test2.textContent;
+    var test3 = document.getElementById("my_timer3");
+    var act3 = test3.textContent;
+    var test4 = document.getElementById("my_timer4");
+    var act4 = test4.textContent;
+    var test5 = document.getElementById("my_timer5");
+    var act5 = test5.textContent;
+    var DocRef = db.collection(resultDate).doc(email);
+      DocRef.set({  
+          User: { logout: resultTime,
+          total: act ,
+          lunch: act2 ,
+          break: act3 , 
+          train: act4 ,
+          project: act5 , 
+          email: email }
+      }, {merge: true});
+  setTimeout(out, 500);        
+ setTimeout(resetTest, 500);
+}
+      observer();
+//*************************************************************************************************/
+
+
 //******************************************************************************************/
 // Three function for three timers. Each status has its own count timer
 function start_timer() {
@@ -250,85 +356,23 @@ function test3() {
   active3 = false;
   active4 = false;
 }
-//************************log in****************************************/
-function login() {
-    var email2 = document.getElementById("email2").value;
-    var password2 = document.getElementById("password2").value;  
-  firebase.auth().signInWithEmailAndPassword(email2, password2)
-}
-        observer();
-//*************************************************************************************************/
+
 function observer() {
   firebase.auth().onAuthStateChanged(function(user) {
-if (user) {
-    // User is signed in.
+    if (user) {
+  // User is signed in.
       var email = user.email;
-      console.log(email); 
-      console.log('************************');
-      var test = document.getElementById("my_timer");
-      var act = test.textContent;
-      var test2 = document.getElementById("my_timer2");
-      var act2 = test2.textContent;
-      var test3 = document.getElementById("my_timer3");
-      var act3 = test3.textContent;
-      var test4 = document.getElementById("my_timer4");
-      var act4 = test4.textContent;
-      var test5 = document.getElementById("my_timer5");
-      var act5 = test5.textContent;
-  DocRef.doc(email).update({
-            active: (act +' ' +date),
-            lunch: (act2 +' ' +date),
-            break: (act3 +' ' +date),
-            train: (act4 +' ' +date),
-            project: (act5 +' ' +date),
-          })       
-        }
-        else {        
-          console.log('nothing to do here')
-
-          // DocRef.doc(email).update({
-          //   active: (act +' ' +date),
-          //   lunch: (act2 +' ' +date),
-          //   break: (act3 +' ' +date),
-          //   train: (act4 +' ' +date),
-          //   project: (act5 +' ' +date),
-          // })
-        }
-      });  
+      console.log('user:',email); 
+      console.log('******************************');
+             
      }
-//**************************************************************** */
-function verify() {
-    user.sendEmailVerification().then(function() {
-  // Email sent.
-        console.log('sending email...');
-      }).catch(function(error) {
-  // An error happened.
-        console.log(error);
- });   
-}
-//*****************************************log out****************************************/
- function logout(){
-  // Works now, though should say => .doc(email)
+      else {        
+          console.log('No user signed in')
+     }
+   });  
+  }
 
-        // var test = document.getElementById("my_timer");
-        // var act = test.textContent;
-        // var test2 = document.getElementById("my_timer2");
-        // var act2 = test2.textContent;
-        // var test3 = document.getElementById("my_timer3");
-        // var act3 = test3.textContent;
-        // var test4 = document.getElementById("my_timer4");
-        // var act4 = test4.textContent;
-        // var test5 = document.getElementById("my_timer5");
-        // var act5 = test5.textContent;
-        // firebase.auth().signOut();
-        pray ();
-//  taste();
-
-          // LOGOUT function
-   setTimeout(out, 500);        
-   setTimeout(resetTest, 500);
-}
-//*************************************************************************************/
+ //*************************************************************************************/
 function resetTest() {
 document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
 document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
@@ -350,7 +394,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     document.getElementById("test").style.display = "none";
     document.getElementById("test10").innerHTML = "Welcome" + " " + name + "!";
     document.getElementById("my_timer5").innerHTML =  '00:00:00' ;
-
     
        changeState();
     } else {
@@ -360,79 +403,20 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 //----------------------------------------------------------------------------------------------
-  function register() {
-      console.log("register");
-      let email = document.getElementById("email").value;
-      let password = document.getElementById("password").value;
-      let name = document.getElementById('name').value;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-// setTimeout(verify, 5000);
-register2(email, password, name);
-}
-//-------------------------------------------------------------------------------------
-function register2(email, password, name) {
-    console.log("register2");    
-    DocRef.doc(email).set({
-        name: name,
-        email: email,
-        password: password,
-        Date: date
-      })  
-      .then(function() {
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
-    document.getElementById('name').value = '';
-    document.getElementById("testAgain").style.display = "none";
-    })
-      .catch(function(error) {
-  // console.error("Error adding document: ", error);
-  alert("The email address is already in use by another account.");
-  });
-  setTimeout(changeState, 1000);
-}
+
 //**************************************************************Brand New Tests*****************************/
   /* Every time the user refresh the browser tha data must be save it to firestore,
   so the timers must add up. */
-// Convert the user var into a boolean
-  function pray () {
-    firebase.auth().onAuthStateChanged(function(user) {
-      var email = user.email; 
-        console.log('hey dude');
-        console.log(email);
-        var test = document.getElementById("my_timer");
-        var act = test.textContent;
-        var test2 = document.getElementById("my_timer2");
-        var act2 = test2.textContent;
-        var test3 = document.getElementById("my_timer3");
-        var act3 = test3.textContent;
-        var test4 = document.getElementById("my_timer4");
-        var act4 = test4.textContent;
-        var test5 = document.getElementById("my_timer5");
-        var act5 = test5.textContent;
-       DocRef.doc(email).update({
-            active: (act +' ' +date),
-            lunch: (act2 +' ' +date),
-            break: (act3 +' ' +date),
-            train: (act4 +' ' +date),
-            project: (act5 +' ' +date),
-          })
-      // setTimeout(out, 500)
-      // function out () {
-      // firebase.auth().signOut();
-      // }
-      })
-    } 
-
-
-    function out () {
-      firebase.auth().signOut();
-      }
-          
-        
-     
-  
-
-
 
   
   
+ 
+//**********************************************************************/
+
+
+
+
+
+
+
+
