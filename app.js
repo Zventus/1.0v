@@ -1,27 +1,20 @@
-  var config = {
-    apiKey: "AIzaSyDiH9td2gSnL2gKgtpqA8UyGZH9t5sHDE0",
-    authDomain: "zventuslogin.firebaseapp.com",
-    databaseURL: "https://zventuslogin.firebaseio.com",
-    projectId: "zventuslogin",
-    storageBucket: "zventuslogin.appspot.com",
-    messagingSenderId: "712831760132"
+var config = {
+  apiKey: "AIzaSyBuaCPUz5s3Iw_hIdhyMG9GmHczwSBefY8",
+  authDomain: "zventus-6cbba.firebaseapp.com",
+  databaseURL: "https://zventus-6cbba.firebaseio.com",
+  projectId: "zventus-6cbba",
+  storageBucket: "zventus-6cbba.appspot.com",
+  messagingSenderId: "68550919770"
 };
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 //******************************** GLOBAL VARIABLES ******************************************/
    var db = firebase.firestore();
    var user = firebase.auth().currentUser;
-   var date = new Date();
-   var options  = { month: 'short', day: '2-digit', weekday: 'short'};
-   var options2 = { hour: 'numeric', minute: 'numeric'};
-   //*******************************************************
-   var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
-   var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
    var active  = false;
    var active2 = false;
    var active3 = false;
    var active4 = false;
-   var active5 = false;  
-      console.log(resultDate);
+   var active5 = false;        
 //*******************************************************************************************/
    function register () {
     var email    = document.getElementById("email").value;
@@ -81,10 +74,15 @@
  }
   //************************log in/log out****************************************/
   function login() {
+    var date = new Date();
+    var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+    var options2 = { hour: 'numeric', minute: 'numeric'};
+    var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+    var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
     var email2    = document.getElementById("email2").value;
     var password2 = document.getElementById("password2").value;
-    firebase.auth().signInWithEmailAndPassword(email2, password2);  
-      setTimeout(function(){
+      firebase.auth().signInWithEmailAndPassword(email2, password2);  
+        setTimeout(function(){
         var DocRef2 = db.collection(resultDate).doc(email2);
         DocRef2.set({  
             User: { 
@@ -94,7 +92,12 @@
 }
 //**********************************************************************/
 function logout() {
-  var user = firebase.auth().currentUser;
+    var date = new Date();
+    var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+    var options2 = { hour: 'numeric', minute: 'numeric'};
+    var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+    var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
+    var user = firebase.auth().currentUser;
     var email = user.email; 
     var test = document.getElementById("my_timer");
     var act = test.textContent;

@@ -1,4 +1,5 @@
 body {
+    display: grid;
     background: #281f69;
     padding: 0px;
     margin: 0px;
