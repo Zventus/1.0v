@@ -19,26 +19,27 @@ firebase.initializeApp(config);
    function register () {
     var email    = document.getElementById("email").value;
     var password = document.getElementById("password").value;
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(function(){
-        verify();
-    })
-    .catch(function(error) {
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(function(){
+            document.getElementById("testAgain").style.display = "none";      
+            verify();    
+          })
+          .catch(function(error) {
       // Handle Errors here.
-            verify();
+            // verify();
       var errorCode = error.code;
       var errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage);
       // ...
     });   
-      // saveData(); // This is the Anonymous function, which creates the registration data.
 }
 //**************************************************************** */
   function verify() {
-  var user = firebase.auth().currentUser;
-  user.sendEmailVerification().then(function() {
+    var user = firebase.auth().currentUser;
+        user.sendEmailVerification().then(function() {
 // Email sent.
+      // setTimeout(observer, 1000);
       console.log('sending email...');
     }).catch(function(error) {
 // An error happened.
@@ -122,7 +123,45 @@ function logout() {
   setTimeout(out, 500);        
  setTimeout(resetTest, 500);
 }
-      observer();
+
+           observer();
+  function observer() {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+      // User is signed in.
+      var date = new Date();
+      var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+      var options2 = { hour: 'numeric', minute: 'numeric'};
+      var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+      var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+          console.log('user:',email);
+          console.log(emailVerified); 
+          console.log('***************************');
+          if (emailVerified) {
+            document.getElementById("user_div").style.display = "block";
+            document.getElementById("test").style.display = "none";
+            document.getElementById("test10").innerHTML = "Welcome" + " " + name + "!";
+            changeState();
+              console.log('hey there');
+              var DocRef = db.collection(resultDate).doc(email);
+      DocRef.set({  
+          User: { login: resultTime,
+          }
+      }, {merge: true});
+            }
+                // If the email isn't verified.
+            else {setTimeout( alert('Please Verify email'), 9000)}
+                   
+          }
+            else {        
+                console.log('No user signed in')
+                document.getElementById("user_div").style.display = "none";
+                document.getElementById("test").style.display = "block";
+           }
+         });  
+        }
 //*************************************************************************************************/
 
 
@@ -360,21 +399,6 @@ function test3() {
   active4 = false;
 }
 
-function observer() {
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-  // User is signed in.
-      var email = user.email;
-      console.log('user:',email); 
-      console.log('******************************');
-             
-     }
-      else {        
-          console.log('No user signed in')
-     }
-   });  
-  }
-
  //*************************************************************************************/
 function resetTest() {
 document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
@@ -390,21 +414,21 @@ active5 = false;
 console.log('Reset done');
 }
 //**********************************************************************/
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in, then Welcome! and time starts running
-    document.getElementById("user_div").style.display = "block";
-    document.getElementById("test").style.display = "none";
-    document.getElementById("test10").innerHTML = "Welcome" + " " + name + "!";
-    document.getElementById("my_timer5").innerHTML =  '00:00:00' ;
+// firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     // User is signed in, then Welcome! and time starts running
+//     document.getElementById("user_div").style.display = "block";
+//     document.getElementById("test").style.display = "none";
+//     document.getElementById("test10").innerHTML = "Welcome" + " " + name + "!";
+//     // document.getElementById("my_timer5").innerHTML =  '00:00:00' ;
     
-       changeState();
-    } else {
-      // No user is signed in.
-    document.getElementById("user_div").style.display = "none";
-    document.getElementById("test").style.display = "block";
-  }
-});
+//        changeState();
+//     } else {
+//       // No user is signed in.
+//     document.getElementById("user_div").style.display = "none";
+//     document.getElementById("test").style.display = "block";
+//   }
+// });
 //----------------------------------------------------------------------------------------------
 
 //**************************************************************Brand New Tests*****************************/
