@@ -5,38 +5,14 @@ body {
     margin: 0px;
   }
 
-img {   
-    width: 30%;
-    }
-
-.test4 {
-    position: static;
-}
-
+img {width: 30%;}
 
 /* This is for the email and password */
-.form-inline {
-    margin-left: 400px;
-}
+.form-inline {margin-left: 400px;}
 
-.btn.btn-info {
-    background: #e0cc21;
-}
+.btn.btn-info {background: #e0cc21;}
 
 .navbar {
     background: #3a6eb4;
     border-width: 100px;
-}
-
-.test5 {
-    list-style-type:none;
-    margin: 0;
-    padding: 0;
-    /* border:1px dotted red; */
-    display: flex;
-    flex-direction:row;
-    flex-wrap: wrap-reverse;
-    justify-content:space-evenly;
-    /* align-items:center; */
-    /* height:200px; */
 }

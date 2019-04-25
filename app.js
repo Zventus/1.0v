@@ -18,15 +18,23 @@ firebase.initializeApp(config);
    var active6 = false;        
 //*******************************************************************************************/
    function register () {
+    var date = new Date();
+    var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+    var options2 = { hour: 'numeric', minute: 'numeric'};
+    var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
+    var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
     var email    = document.getElementById("email").value;
     var password = document.getElementById("password").value;
       firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(function(){     
-            verify();    
+            var DocRef = db.collection(resultDate).doc(email);
+      DocRef.set({  
+          User: { login: resultTime,
+          }
+      }, {merge: true});
           })
           .catch(function(error) {
       // Handle Errors here.
-            // verify();
       var errorCode = error.code;
       var errorMessage = error.message;
             console.log(errorCode);
@@ -34,17 +42,7 @@ firebase.initializeApp(config);
       // ...
     });   
 }
-//**************************************************************** */
-  function verify() {
-    var user = firebase.auth().currentUser;
-        user.sendEmailVerification().then(function() {
-// Email sent.
-      console.log('sending email...');
-    }).catch(function(error) {
-// An error happened.
-      console.log(error);
-  });   
-}
+
 //*******************************************************************************/
   function out () {
       firebase.auth().signOut();
@@ -100,44 +98,33 @@ function logout() {
  setTimeout(resetTest, 500);
 }
 
-           observer();
-  function observer() {
+  //          observer();
+  // function observer() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
       // User is signed in.
-      var date = new Date();
-      var options  = { month: 'short', day: '2-digit', weekday: 'short'};
-      var options2 = { hour: 'numeric', minute: 'numeric'};
-      var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
-      var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
         var email = user.email;
-        var emailVerified = user.emailVerified;
             console.log('user:', email);
+            //Navbar...HIDE
             document.getElementById("color").style.display = "none";
-          if (emailVerified) {
+            //Timers & LogOut, Status Div...SHOW
             document.getElementById("user_div").style.display = "block";
+            //Hello! Div...HIDE
             document.getElementById("test").style.display = "none";
+            // Register Form...HIDE
+            document.getElementById("testAgain").style.display = "none";
+            //Welcome!...SHOWS
             document.getElementById("test10").innerHTML = "Welcome" + " " + name + "!";
             changeState();
-            changeState6();
-              // console.log('hey there');
-              var DocRef = db.collection(resultDate).doc(email);
-      DocRef.set({  
-          User: { login: resultTime,
-          }
-      }, {merge: true});
-            }
-                // If the email isn't verified.
-            else {setTimeout( alert('Please Verify email'), 9000)}
-                   
+            changeState6();  
           }
             else {        
                 console.log('No user signed in')
                 document.getElementById("user_div").style.display = "none";
                 document.getElementById("test").style.display = "block";
+                document.getElementById("color").style.display = "block";
            }
-         });  
-        }
+        });  
 //*************************************************************************************************/
 
 // Three function for three timers. Each status has its own count timer
