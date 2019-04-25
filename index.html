@@ -16,7 +16,7 @@
   </head>
 <!-- ***************************************************************************************************************************************************** -->
 <body>
-<div class=" container mt-3">
+<div id="hide" class=" container mt-3">
   <nav id="color" class="navbar justify-content-between">
         <!-- <button class="close" type="button">Data</button> -->
     <img src="zventus_white_logo.png" class="">
@@ -56,6 +56,7 @@
   <div id="test10" class="container"></div>
     <hr>
       <p class="mt-5">Total time: <span id="my_timer" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
+      <p>Available: <span id="my_timer6" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
       <p>Lunch: <span id="my_timer2" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
       <p>Break: <span id="my_timer3" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
       <p>Training: <span id="my_timer4" style="color: #f00"; font-size: 1500%; font-weight: bold;>00:00:00</span></p>
@@ -69,7 +70,7 @@
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Status</button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <!-- <button  id="Active" onclick="captureAct()" class="dropdown-item" href="#">Active</a> -->
+          <button  id="Active" onclick="captureAvai()" class="dropdown-item" href="#">Available</a>
           <button id="At lunch" onclick="captureLunch()" class="dropdown-item" href="#">At Lunch</a>
           <button id="on break" onclick="captureBreak()" class="dropdown-item" href="#">On Break</a>
           <button id="train" onclick="captureTrain()" class="dropdown-item" href="#">Training</a>
@@ -83,6 +84,11 @@
   <h1 class="mt-5">Hello!</h1>
     <hr>
 </div>
+
+<footer>
+  <p>Posted by: Erick Sandoval</p>
+  <p>Contact information: <a href="mailto:someone@example.com">erick.sandoval@prontoinsurance.com</a>.</p>
+</footer>
         
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
