@@ -21,7 +21,7 @@ firebase.initializeApp(config);
     var password = document.getElementById("password").value;
       firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(function(){
-            document.getElementById("testAgain").style.display = "none";      
+            document.getElementById("exampleModal").style.display = "none";      
             verify();    
           })
           .catch(function(error) {
