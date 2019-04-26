@@ -1,5 +1,5 @@
 body {
-    display: grid;
+    /* display: grid; */
     background: #281f69;
     padding: 0px;
     margin: 0px;
@@ -15,4 +15,11 @@ img {width: 30%;}
 .navbar {
     background: #3a6eb4;
     border-width: 100px;
+}
+
+
+.footer {
+  color: #e0cc21;
+  font-family: 'Times New Roman', Times, serif;
+  padding-left: 1000px;
 }
