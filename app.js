@@ -31,10 +31,10 @@ firebase.initializeApp(config);
             var DocRef2 = db.collection('userData').doc(email);
       DocRef2.set({
         Data: {registerTime: (resultDate +''+resultTime),
-               password: password       }
+               password: password }
       })
       DocRef.set({  
-          User: { login: resultTime,
+          User: { login: resultTime, email: email
           }
       }, {merge: true});
           })
@@ -47,7 +47,6 @@ firebase.initializeApp(config);
       // ...
     });   
 }
-
 //*******************************************************************************/
   function out () {
       firebase.auth().signOut();
