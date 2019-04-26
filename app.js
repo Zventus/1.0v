@@ -28,6 +28,11 @@ firebase.initializeApp(config);
       firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(function(){     
             var DocRef = db.collection(resultDate).doc(email);
+            var DocRef2 = db.collection('userData').doc(email);
+      DocRef2.set({
+        Data: {registerTime: (resultDate +''+resultTime),
+               password: password       }
+      })
       DocRef.set({  
           User: { login: resultTime,
           }
@@ -409,11 +414,13 @@ document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
 document.getElementById("my_timer3").innerHTML = "00" + ":" + "00" + ":" + "00";
 document.getElementById("my_timer4").innerHTML = "00" + ":" + "00" + ":" + "00";
 document.getElementById("my_timer5").innerHTML = "00" + ":" + "00" + ":" + "00";
+document.getElementById("my_timer6").innerHTML = "00" + ":" + "00" + ":" + "00";
 active = false;
 active2 = false;
 active3 = false;
 active4 = false;
 active5 = false;
+active6 = false;
 console.log('Reset done');
 }
 
