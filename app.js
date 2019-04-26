@@ -19,10 +19,11 @@ firebase.initializeApp(config);
 //*******************************************************************************************/
    function register () {
     var date = new Date();
-    var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+    var options  = { month: 'short', day: '2-digit' };
     var options2 = { hour: 'numeric', minute: 'numeric'};
     var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
     var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
+    console.log(resultDate);
     var email    = document.getElementById("email").value;
     var password = document.getElementById("password").value;
       firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -30,7 +31,7 @@ firebase.initializeApp(config);
             var DocRef = db.collection(resultDate).doc(email);
             var DocRef2 = db.collection('userData').doc(email);
       DocRef2.set({
-        Data: {registerTime: (resultDate +''+resultTime),
+        Data: {registerTime: (resultDate + ' ' + resultTime),
                password: password }
       })
       DocRef.set({  
@@ -54,7 +55,7 @@ firebase.initializeApp(config);
   //************************log in/log out****************************************/
   function login() {
     var date = new Date();
-    var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+    var options  = { month: 'short', day: '2-digit'};
     var options2 = { hour: 'numeric', minute: 'numeric'};
     var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
     var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
@@ -72,7 +73,7 @@ firebase.initializeApp(config);
 //--------------------------------------------------------------------------/
 function logout() {
     var date = new Date();
-    var options  = { month: 'short', day: '2-digit', weekday: 'short'};
+    var options  = { month: 'short', day: '2-digit'};
     var options2 = { hour: 'numeric', minute: 'numeric'};
     var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
     var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
