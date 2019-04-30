@@ -89,14 +89,17 @@ function logout() {
     var act4 = test4.textContent;
     var test5 = document.getElementById("my_timer5");
     var act5 = test5.textContent;
+    var test6 = document.getElementById("my_timer6");
+    var act6 = test6.textContent;
     var DocRef = db.collection(resultDate).doc(email);
       DocRef.set({  
           User: { logout: resultTime,
-          total: act ,
-          lunch: act2 ,
-          break: act3 , 
-          train: act4 ,
-          project: act5 , 
+          totalTime: act,
+          available: act6,
+          lunch: act2,
+          break: act3, 
+          train: act4,
+          project: act5, 
           email: email }
       }, {merge: true});
   setTimeout(out, 500);        
