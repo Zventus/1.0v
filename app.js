@@ -61,13 +61,22 @@ firebase.initializeApp(config);
     var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
     var email2    = document.getElementById("email2").value;
     var password2 = document.getElementById("password2").value;
+    if (email2.length < 4) {
+      alert('Please enter an email address.');
+      return;
+    }
+    if (password2.length < 4) {
+      alert('Please enter a password.');
+      return;
+    }
       firebase.auth().signInWithEmailAndPassword(email2, password2);  
-        setTimeout(function(){
+        setTimeout(function(user){
+          if (user) {
         var DocRef2 = db.collection(resultDate).doc(email2);
         DocRef2.set({  
             User: { 
             login: (resultTime)}
-        }, {merge: true});
+        }, {merge: true});}
     }, 500)   
 }
 //--------------------------------------------------------------------------/
