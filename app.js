@@ -70,14 +70,17 @@ firebase.initializeApp(config);
       return;
     }
       firebase.auth().signInWithEmailAndPassword(email2, password2);  
-        setTimeout(function(user){
-          if (user) {
-        var DocRef2 = db.collection(resultDate).doc(email2);
+        // setTimeout(function(user){
+          firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
+                var DocRef2 = db.collection(resultDate).doc(email2);
         DocRef2.set({  
             User: { 
             login: (resultTime)}
-        }, {merge: true});}
-    }, 500)   
+        }, {merge: true})
+              }
+          } ) ;     
+    // }, 500)   
 }
 //--------------------------------------------------------------------------/
 function logout() {
