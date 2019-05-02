@@ -153,7 +153,7 @@ function logout() {
             // Register Form...HIDE
             document.getElementById("testAgain").style.display = "none";
             //Welcome!...SHOWS
-            document.getElementById("test10").innerHTML = "Welcome" + " " + name + "!";
+            document.getElementById("test10").innerHTML = "Welcome" +  "!" + " 👨‍💻 ";
             changeState();
             changeState6();  
           }

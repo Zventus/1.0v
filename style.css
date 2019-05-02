@@ -33,6 +33,11 @@ body {
 }
 
 .space {
-  height:500px;
+  height:440px;
+  border:1px;
+}
+
+.space2 {
+  height:100px;
   border:1px;
 }
