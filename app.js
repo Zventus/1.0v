@@ -23,9 +23,18 @@ firebase.initializeApp(config);
     var options2 = { hour: 'numeric', minute: 'numeric'};
     var resultDate = new Intl.DateTimeFormat('en-GB', options).format(date);
     var resultTime = new Intl.DateTimeFormat('en-GB', options2).format(date);
-    console.log(resultDate);
     var email    = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+      if (email.length < 8) {
+        alert('Please enter an email address.');
+      return;
+    }
+      if (password.length < 4) {
+        alert('Please enter a password.');
+      return;
+    }
+    // Sign in with email and pass.
+    // [START authwithemail]
       firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(function(){     
             var DocRef = db.collection(resultDate).doc(email);
@@ -69,7 +78,17 @@ firebase.initializeApp(config);
       alert('Please enter a password.');
       return;
     }
-      firebase.auth().signInWithEmailAndPassword(email2, password2);  
+      firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+        } else {
+          alert(errorMessage);
+        }
+      })
         // setTimeout(function(user){
           firebase.auth().onAuthStateChanged(function(user) {
               if (user) {
