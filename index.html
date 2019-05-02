@@ -30,7 +30,7 @@
           <div class="col-sm-8"></div>
           <div class="col-sm ml-5">
         <button class="btn btn-info mr-2" id="button" onclick="login()">Log in</button>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" >Register</button>
+        <button type="button" class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal" >Register</button>
         </div>
       </div>
     </nav>
@@ -74,9 +74,10 @@
 
 <div class="dropdown">
   <div class="dropdown">
-    <button type="button" onclick="logout()" class="btn btn-primary">Log Out</button> 
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Status</button>
+      <button class="btn btn-primary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Status</button>
+    <button type="button" onclick="logout()" class="btn btn-danger ml-5">Log Out</button> 
+    
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button  id="Active" onclick="captureAvai()" class="dropdown-item" href="#">Available</a>
           <button id="At lunch" onclick="captureLunch()" class="dropdown-item" href="#">At Lunch</a>
@@ -97,10 +98,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<div class="space"></div>
 <div class="container center">
 <div class="footer status">
-  &copy; 2019 Minimal Website &nbsp;<span class="separator">| Design by &nbsp;Erick Sandoval | Zventus
+    | Any doubts or suggestions to Erick or Dario: erick.sandoval@prontoinsurance.com or dario.marquez@prontoinsurance.com 
+   &nbsp;<span class="separator">| Design by &nbsp;Erick Sandoval | Zventus 2019 &copy; 
   </div>
 </div>
 </body>
 </html>
+
+&copy;

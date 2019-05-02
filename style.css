@@ -21,7 +21,6 @@ body {
 .footer {
   color: #e0cc21;
   font-family: 'Times New Roman', Times, serif;
-  /* padding-left: 900px; */
 }
 
 .timers {
@@ -31,4 +30,9 @@ body {
 
 .status {
   font-family: 'Roboto', sans-serif;
+}
+
+.space {
+  height:500px;
+  border:1px;
 }
