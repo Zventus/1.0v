@@ -23,3 +23,12 @@ body {
   font-family: 'Times New Roman', Times, serif;
   /* padding-left: 900px; */
 }
+
+.timers {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+.status {
+  font-family: 'Roboto', sans-serif;
+}
