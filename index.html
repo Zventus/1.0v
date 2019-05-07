@@ -10,7 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script> 
-    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="compress.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Zventus</title>
     <link rel="icon" href="z.png">
@@ -68,11 +68,11 @@
     <hr>
     <!-- ; font-size: 1500%; font-family: Roboto, sans-serif; -->
       <p class="status">Total time: <span id="my_timer" style="color: #f00" class="timers"  >00:00:00</span></p>
-      <p class="status">Available: <span id="my_timer6" style="color: #f00" class="timers">00:00:00</span></p>
-      <p class="status">Lunch: <span id="my_timer2" style="color: #f00" class="timers">00:00:00</span></p>
-      <p class="status">Break: <span id="my_timer3" style="color: #f00" class="timers">00:00:00</span></p>
-      <p class="status">Training: <span id="my_timer4" style="color: #f00" class="timers">00:00:00</span></p>
-      <p class="status">Project: <span id="my_timer5" style="color: #f00" class="timers">00:00:00</span></p>
+      <p class="status">Available: <span id="my_timer2" style="color: #f00" class="timers">00:00:00</span></p>
+      <p class="status">Lunch: <span id="my_timer3" style="color: #f00" class="timers">00:00:00</span></p>
+      <p class="status">Break: <span id="my_timer4" style="color: #f00" class="timers">00:00:00</span></p>
+      <p class="status">Training: <span id="my_timer5" style="color: #f00" class="timers">00:00:00</span></p>
+      <p class="status">Project: <span id="my_timer6" style="color: #f00" class="timers">00:00:00</span></p>
 <!------------------------------------------- ENDS TIMERS SECTION. -------------------------------------------->
 
 
@@ -87,7 +87,7 @@
           <button id="At lunch" onclick="captureLunch()" class="dropdown-item" href="#">At Lunch</a>
           <button id="on break" onclick="captureBreak()" class="dropdown-item" href="#">On Break</a>
           <button id="train" onclick="captureTrain()" class="dropdown-item" href="#">Training</a>
-          <button id="on project" onclick="test3()" class="dropdown-item" href="#">On Project</a>
+          <button id="on project" onclick="captureProyect()" class="dropdown-item" href="#">On Project</a>
         </div>
       </div>    
     </div>

@@ -1,9 +1,9 @@
 body {
-    /* display: grid; */
-    background: #281f69;
-    padding: 0px;
-    margin: 0px;
-  }
+  /* display: grid; */
+  background: #281f69;
+  padding: 0px;
+  margin: 0px;
+}
 
 /* img {width: 30%;} */
 
@@ -13,34 +13,34 @@ body {
 .btn.btn-info {background: #e0cc21;}
 
 .navbar {
-    background: #3a6eb4;
-    border-width: 100px;
+  background: #3a6eb4;
+  border-width: 100px;
 }
 
 
 .footer {
-  color: #e0cc21;
-  font-family: 'Times New Roman', Times, serif;
+color: #e0cc21;
+font-family: 'Times New Roman', Times, serif;
 }
 
 .timers {
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
+font-family: 'Roboto', sans-serif;
+font-weight: bold;
 }
 
 .status {
-  font-family: 'Roboto', sans-serif;
+font-family: 'Roboto', sans-serif;
 }
 
 .space {
-  height:440px;
-  border:1px;
+height:440px;
+border:1px;
 }
 
 .space2 {
-  height:100px;
-  border:1px;
+height:100px;
+border:1px;
 }
 .werk {
-  background-color: white;
+background-color: white;
 }
