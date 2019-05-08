@@ -1,20 +1,14 @@
 body {
-  /* display: grid; */
-  background: #281f69;
-  padding: 0px;
-  margin: 0px;
+  background: #281f69;  
 }
 
-/* img {width: 30%;} */
-
 /* This is for the email and password */
-.form-inline {margin-left: 400px;}
+/* .form-inline {margin-left: 400px;} */
 
 .btn.btn-info {background: #e0cc21;}
 
 .navbar {
   background: #3a6eb4;
-  border-width: 100px;
 }
 
 
@@ -30,8 +24,12 @@ font-weight: bold;
 
 .status {
 font-family: 'Roboto', sans-serif;
+/* display: inline; */
 }
 
+
+
+/* THE SPACES HANDLE THE POSITION OF THE TIMER DIV */
 .space {
 height:440px;
 border:1px;
@@ -41,6 +39,11 @@ border:1px;
 height:100px;
 border:1px;
 }
-.werk {
-background-color: white;
-}
+
+/* THIS IS FOR THE ZVENTUS LOGO BACKGROUND COLOR */
+/* .werk {
+  background-color: white;
+  display: inline;
+} */
+
+
