@@ -1,14 +1,13 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyAENuNBvfE43PiHJi6NAeRh4VFPYv0WadI",
-    authDomain: "sundaytest-cf6b9.firebaseapp.com",
-    databaseURL: "https://sundaytest-cf6b9.firebaseio.com",
-    projectId: "sundaytest-cf6b9",
-    storageBucket: "sundaytest-cf6b9.appspot.com",
-    messagingSenderId: "287005178350",
-    appId: "1:287005178350:web:b3dd432537fb57b3"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+var config = {
+  apiKey: "AIzaSyBuaCPUz5s3Iw_hIdhyMG9GmHczwSBefY8",
+  authDomain: "zventus-6cbba.firebaseapp.com",
+  databaseURL: "https://zventus-6cbba.firebaseio.com",
+  projectId: "zventus-6cbba",
+  storageBucket: "zventus-6cbba.appspot.com",
+  messagingSenderId: "68550919770"
+};
+firebase.initializeApp(config);
+
   //******************************** GLOBAL VARIABLES ******************************************/
      var db = firebase.firestore();
      var user = firebase.auth().currentUser;
