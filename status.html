@@ -6,15 +6,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS, momentjs, firebase, firestore -->
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Zventus</title>
     <link rel="icon" href="z.png">
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app2.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Ranga|Roboto&display=swap" rel="stylesheet">
 </head>
 
@@ -31,7 +33,7 @@
                 </div>
                 <div class="row mt-3">
                     <li class="col-3 footer">
-                        <a data-toggle="modal" data-target="#exampleModal" href="">Register</a>
+                        <a data-toggle="modal" data-target="#exampleModal" href="https://zventus.github.io/Data/">Register</a>
                     </li>
                     <div class="col-6"></div>
                     <input type="password" id="password2" placeholder="password" class="col-3">
@@ -54,31 +56,11 @@
                   </button>
         </nav>
     </div>
-    
-    <br>
-        <!-- ********************************************************************************************* -->
-        <div class="container sty mt-5" id="test" >
-            <p style="font-family: 'Ranga', cursive; font-size: 50px; margin:auto; width: 50%; padding: 5px; text-align: center;">Good day!</p>
-            <hr>
-            <br>
-            <img id="imgOne" style="border: 3px solid; padding: 10px;" src="Noslogan.png" class="">
-            <div style='height: 80px; width: 100px;' class="row"></div>
-            <div class="" id='clock'>00:00:00</div>
-        
-    </div>
-        <br>
-<!-- ************************************************************************ -->
-<script>
-    const clock = document.getElementById('clock');
-                        setInterval(() => {
-                            const now = moment();
-                            const humanReadable = now.format('hh:mm:ss a');
-                                clock.textContent = humanReadable;
-                        }, 1000
-                        )
-</script>
 
-   
+    <div style="border: black; height: 50%; width: 50%" id="test" class="container">
+        
+           hey ho  
+    </div>
     <!-- HERE STARTS REGISTRATION MODAL -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -101,62 +83,18 @@
         </div>
     </div>
     <!-- END REGISTRATION MODAL -->
-    <div id="user_div" class="sty  container mt-3">
-        <hr>
-        <div class="row ">
-            <hr>
-            <div z text-align: center; class="col-4 giphy ">HAVE AN AWESOME DAY!
-                    <div style="text-align: left; width:80%;height:0;padding-bottom:100%;position:relative;">
-                        <iframe src="https://giphy.com/embed/JIX9t2j0ZTN9S" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
-                        </iframe></div><p><a href="https://giphy.com/gifs/JIX9t2j0ZTN9S"></a></p></div>
-            <div class="col-8">
-                <div class="row mt-4 ml-3">
-                        <p class="status">Available: <span id="my_timer"  class="timers">00:00:00</span></p></div>
-                        <div class="row mt-2 ml-3">
-                        <p class="status">Lunch: <span id="my_timer2"  class="timers">00:00:00</span></p></div>
-                        <div class="row mt-2 ml-3">
-                        <p class="status">Break: <span id="my_timer3"  class="timers">00:00:00</span></p></div>
-                        <div class="row mt-2 ml-3">
-                        <p class="status">Training: <span id="my_timer4"  class="timers">00:00:00</span></p></div>
-                        <div class="row mt-2 ml-3">
-                        <p class="status">Project: <span id="my_timer5"  class="timers">00:00:00</span></p></div>  
-                        <div class="dropdown">
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle " type="button" id="dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            Status</button>
-                                    <button type="button" onclick="logout()" class="btn btn-danger ml-5">Log Out</button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item col" >Available</a>
-                                          <a class="dropdown-item col" >At Lunch</a>
-                                          <a class="dropdown-item col" >On Break</a>
-                                          <a class="dropdown-item col" >Training</a>
-                                          <a class="dropdown-item col" >On Project</a>
-                                        </div>
-                                                                    </div>
-                                                                </div>   
-            </div>
-        </div> 
-    </div>
-        <hr>
-        
-        <!------------------------------------------- ENDS TIMERS SECTION. -------------------------------------------->
-
-      
-
-    <div class="space"></div>
-    <div class="container center">
+    
+    <!-- <div class="container center">
         <div class="footer status">
             | Any doubts or suggestions to Erick or Dario: erick.sandoval@prontoinsurance.com or dario.marquez@prontoinsurance.com &nbsp;
             <span class="separator">| Design by &nbsp;Erick Sandoval | Zventus 2019 &copy;
         </div>
-    </div>
+    </div> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="timers.js"></script>
   </body>
 </html>

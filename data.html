@@ -1,0 +1,205 @@
+    <html lang="en">
+      <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+        <link rel="icon" href="data.jpg">
+      </head> 
+    <!--********Body starts*************-->
+      <body onload=''>
+    
+          <script>
+              let config = {
+    apiKey: "AIzaSyBuaCPUz5s3Iw_hIdhyMG9GmHczwSBefY8",
+    authDomain: "zventus-6cbba.firebaseapp.com",
+    databaseURL: "https://zventus-6cbba.firebaseio.com",
+    projectId: "zventus-6cbba",
+    storageBucket: "zventus-6cbba.appspot.com",
+    messagingSenderId: "68550919770"
+    };
+              firebase.initializeApp(config);
+    function table () {
+      console.log('table');
+      let db = firebase.firestore();
+      var query = document.getElementById('test').value;
+      var table = document.getElementById('table');
+      let user = firebase.auth().currentUser;
+    //    var email = user.email; 
+    db.collection(query).get().then((querySnapshot) => {
+        table.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data().Total.Available}`);
+          table.innerHTML += 
+      `<tr>
+          <td>${doc.id}</td>
+          <td>${doc.data().Total.Available}</td>
+          <td>${doc.data().Total.Break}</td>
+          <td>${doc.data().Total.Lunch}</td>
+          <td>${doc.data().Total.Project}</td>
+          <td>${doc.data().Total.Training}</td>
+          <td>${doc.data().Total.totalTime}</td>
+          
+        </tr>`
+      });
+    });
+    }
+    
+    function test () {
+     console.log('clear');
+     let table = document.getElementById('table');
+     table.innerHTML = ' ';
+    }
+              </script> 
+        
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="testAgain" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Enter password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <input type="email" id="email" placeholder="email" class="form-control my-3">
+                    <input type="password" id="password" placeholder="password" class="form-control my-3">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="register()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+            <div class="pos-f-t">
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="bg-dark p-4">
+                            <div class="row ">
+                                <li class="col-3 footer">
+                                    <a href="data.html">Data</a>
+                                </li>
+                                <div class="col-6"></div>
+                                <input type="email" id="email2" placeholder="email" class="col-3">
+                            </div>
+                            <div class="row mt-3">
+                                <li class="col-3 footer">
+                                    <a data-toggle="modal" data-target="#exampleModal" href="">Register</a>
+                                </li>
+                                <div class="col-6"></div>
+                                <input type="password" id="password2" placeholder="password" class="col-3">
+                            </div>
+                            <div class="row mt-3">
+                                <li class="col-3 footer">
+                                    <a href="status.html">Status</a>
+                                </li>
+                                <div class="col-8"></div>
+                                <button class="col-1 btn btn-info " id="button" onclick="login()">Log in</button>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-dark bg-dark">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="z.png" width="30" height="30" class="d-inline-block align-top" alt=""> Zventus Web App
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                              </button>
+                    </nav>
+                </div>
+
+          <div class="container form-inline">
+        <input type = 'text' id='test' placeholder='Date' class='form-control ml-2 mt-3'>
+        <button class="btn btn-info ml-2 mt-3" id="button" onclick="table()">Enter</button>
+        <button class="btn btn-info ml-2 mt-3" id="button" onclick="test()">Clear</button>
+        <p class="mt-3 ml-3">Query Example: 26 Apr / Weekday Month </p>
+          </div>
+          <br>
+          <style>
+            .table {
+              border-collapse: collapse;
+              border-radius: 5px 5px 0 0;
+              overflow: hidden;
+              margin: 25px 0;
+              font-size: 0.9em;
+              min-width: 400px;
+              box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            }
+            .table thead tr {
+              background-color: #17a2b8;
+              color: #ffffff;
+              text-align: left;
+              font-weight: bold;
+            }
+            .table th,
+            .table td {
+              padding: 12px 15px;
+            }
+            .table tbody tr {
+              border-bottom: 1px solid #dddddd;
+            }
+            .table tbody tr:nth-of-type(even) {
+              background-color: #f3f3f3;
+            }
+            .table tbody tr:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
+            .table tbody tr.active-row {
+              font-weight: bold;
+              color: #009879;
+            }
+
+            
+          </style>
+        <div id="clear" class="container">
+            <table  class="table">
+                <thead>
+                <tr>
+                <th scope="col">User</th>            
+                <th scope="col">Available</th>
+                <th scope="col">Break</th>
+                <th scope="col">Lunch</th> 
+                <th scope="col">Project</th> 
+                <th scope="col">Training</th> 
+                <th scope="col">Total Time</th> 
+              </tr>
+            </thead>
+            <tbody id="table">
+              <tr>
+                <!-- <th scope="row">1</th> -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <!-- <tr>
+                 <th scope="row">2</th> 
+                <td></td>
+                <td></td>
+              </tr> -->
+            </tbody>
+          </table>
+      </div>
+    
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+      </body>
+    </html>
