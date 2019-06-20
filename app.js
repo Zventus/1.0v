@@ -146,8 +146,7 @@ function logout() {
     
      setTimeout(() => {firebase.auth().signOut()}, 500);
     // setTimeout(resetTest, 250);
-    // resetTest()
-    
+     resetTest()
 } //End logout
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -350,7 +349,7 @@ function substract () {
                 console.log('outHH:mm', out)
                 console.log('loginMinutes:',x)
                 console.log('outMinutes:',y)
-        console.log('Available:', z);
+        console.log('Break:', z);
             DocRef.set({
                 Total: {Break: z},
                 Timestamps: {outBre: out} },{
@@ -376,7 +375,7 @@ function substract () {
                     console.log('outHH:mm', out)
                     console.log('loginMinutes:',x)
                     console.log('outMinutes:',y)
-            console.log('Available:', z);
+            console.log('Training:', z);
             DocRef.set({
                 Total: {Training: z},
                 Timestamps: {outTrain: out} },{
@@ -401,7 +400,7 @@ function substract () {
                     console.log('outHH:mm', out)
                     console.log('loginMinutes:',x)
                     console.log('outMinutes:',y)
-            console.log('Available:', z);
+            console.log('Project:', z);
         DocRef.set({
             Total: {Project: z},
             Timestamps: {outBre: out} },{
@@ -412,11 +411,10 @@ function substract () {
 }
 
 function resetTest() {
-    document.getElementsByClassName("timers").innerHTML  = "00" + ":" + "00" + ":" + "00";
-//  active = 0
-//  activeTwo = 0
-//  activeThree = 0
-//  activeFour = 0
-//  activeFive = 0 
+    document.getElementById("my_timer").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer2").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer3").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer4").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementById("my_timer5").innerHTML = "00" + ":" + "00" + ":" + "00";
     console.log('Reset done');
 }
