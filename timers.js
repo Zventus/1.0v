@@ -6,7 +6,6 @@ function start_timer() {
         var hour = arr[0]; // getting hour
         var min = arr[1]; // minutes
         var sec = arr[2]; // seconds
-  
         if (sec == 59) {
             if (min == 59) {
                 hour++;
@@ -26,7 +25,7 @@ function start_timer() {
         setTimeout(start_timer, 1000); // keep repeating with the speed of 1 sec 
     }
   }
-  start_timer()
+
   function start_timer2() {
       if(activeTwo) {
         var timer = document.getElementById("my_timer2").innerHTML;
@@ -34,7 +33,6 @@ function start_timer() {
         var hour = arr[0]; // getting hour
         var min = arr[1]; // minutes
         var sec = arr[2]; // seconds
-  
         if (sec == 59) {
             if (min == 59) {
                 hour++;
@@ -62,7 +60,6 @@ function start_timer() {
         var hour = arr[0]; // getting hour
         var min = arr[1]; // minutes
         var sec = arr[2]; // seconds
-  
         if (sec == 59) {
             if (min == 59) {
                 hour++;

@@ -11,9 +11,17 @@ firebase.initializeApp(config);
 const firestore = firebase.firestore();
 let user = firebase.auth().currentUser;
 const settings = {/* your settings... */ timestampsInSnapshots: true};
-  firestore.settings(settings);
-
-
+firestore.settings(settings);
+let active = 1
+let activeTwo = 0
+let activeThree = 0
+let activeFour = 0
+let activeFive = 0 
+let avai = 0 // false
+let bre = 0
+let lun = 0
+let proy = 0
+let trai = 0
 function register() {
     let date = moment().format('DD MMM');
     let m = moment().format('hh:mm:ss');
@@ -82,6 +90,7 @@ function login() {
             alert(errorMessage)
         }
     })
+    
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             var DocRef2 = firestore.collection(date).doc(email2);
@@ -110,7 +119,6 @@ function login() {
     })
 }
 
-
 function logout() {
     console.log('logout');
     let date = moment().format('DD MMM');
@@ -135,10 +143,11 @@ function logout() {
             merge: !0
         })
     })
-    setTimeout(() => {
-        firebase.auth().signOut()
-    }, 550);
-    setTimeout(resetTest, 250);
+    
+     setTimeout(() => {firebase.auth().signOut()}, 500);
+    // setTimeout(resetTest, 250);
+    // resetTest()
+    
 } //End logout
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -147,8 +156,7 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log('user:', email);
         document.getElementById("user_div").style.display = "block";
         document.getElementById("test").style.display = "none";
-        // document.getElementById("test10").innerHTML = "Welcome" + "!" + " 👨‍💻 ";
-        // start_timer();
+        start_timer()
     } else {
         console.log('No user signed in')
         document.getElementById("user_div").style.display = "none";
@@ -156,32 +164,26 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
-
-let active = 1
-let activeTwo = 0
-let activeThree = 0
-let activeFour = 0
-let activeFive = 0 
-let avai = 1
-let bre = 0
-let lun = 0
-let proy = 0
-let trai = 0 
 let status = document.querySelectorAll('a.col').length;
 let timers = document.querySelectorAll('span.timers').length;
 let date = moment().format('DD MMM');
 let time = moment().format('HH:mm:ss');
-console.log(status, timers);
+// console.log(status, timers);
 for (let i = 0; i < status; i++) {
     document.querySelectorAll("a.col")[i].addEventListener(
         "click", () => {
             let user = firebase.auth().currentUser;
             let email = user.email;
             let DocRef = firestore.collection(date).doc(email);
-            if (i == 0) {
-                 avai = 1
-                start_timer()
+            if (i == 0) { // available
                 substract()
+                  avai = 0 // has to be false              
+                  active = 1
+                  activeTwo = 0
+                  activeThree = 0
+                  activeFour = 0
+                  activeFive = 0 
+                start_timer()
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -190,12 +192,15 @@ for (let i = 0; i < status; i++) {
                 }, {
                     merge: !0
                 })
-            } else if (i == 1) {
-                lun = 1
-                active = 0;
+            } else if (i == 1) { // lunch
+                 substract();
                 activeTwo = 1;
+                active = 0;
+                activeThree = 0
+                activeFour = 0
+                activeFive = 0 
                 start_timer2();
-                substract();
+                lun = 1 // lunch is active
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -204,12 +209,16 @@ for (let i = 0; i < status; i++) {
                 }, {
                     merge: !0
                 })
-            } else if (i == 2) {
+            } else if (i == 2) { // break
+                substract()
                 bre = 1
                 activeTwo = 0
+                active = 0
+                activeFour = 0
+                activeFive = 0
                 activeThree = 1
                 start_timer3();
-                substract()
+                
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -218,12 +227,16 @@ for (let i = 0; i < status; i++) {
                 }, {
                     merge: !0
                 })
-            } else if (i == 3) {
+            } else if (i == 3) { // trai
+                substract()
                 trai = 1
                 activeThree = 0 
                 activeFour = 1
+                active = 0;
+                activeThree = 0
+                activeFive = 0
                 start_timer4();
-                substract()
+                
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -232,12 +245,16 @@ for (let i = 0; i < status; i++) {
                 }, {
                     merge: !0
                 })
-            } else if (i == 4) {
-                proy = 1
+            } else if (i == 4) { // project
+                substract()
+                activeFour = 0
+                active = 0;
+                activeThree = 0
+                activeTwo = 0
                 activeFour = 0
                 activeFive = 1
                 start_timer5();
-                substract()
+                proy = 1
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -251,111 +268,155 @@ for (let i = 0; i < status; i++) {
     )
 }
 
-let substract = () => {
+function substract () {
     let user = firebase.auth().currentUser;
     let email = user.email;
     let DocRef = firestore.collection(date).doc(email);
+        if(!avai) {
+            DocRef.get().then((doc) => {
+    let login = doc.data().Timestamps.inAvai; // string
+    let a = moment(login, 'HH:mm:ss').clone().get('minute'); // login convertion to momentjs
+    let b = moment(login, 'HH:mm:ss').clone().get('hours');
+    let sec = moment(login, 'HH:mm:ss').clone().get('seconds')
+    let c = moment().clone().get('minutes'); //actual time
+    let d = moment().clone().get('hours');
+    let e = moment().clone().get('seconds');
+    let out = moment().clone().format('HH:mm:ss').toString() // this goes to fb
+    console.log('outAvai:', out)
+    
+    //**** ARITHMETIC */
+    console.log('login', ' ', 'min:', a, 'hours:', b, 'sec:',sec)
+
+    let x = a + (b*60) + (sec/60)
+    let y = c + (d*60) + (e/60)
+    let z = (y - x).toPrecision(2);
+                console.log('loginMinutes:',x)
+                console.log('outMinutes:',y)
+        console.log('Available:', z);
+     DocRef.set({
+        Total: {Available: z},
+        Timestamps: {outAvai: out}
+    }, {
+        merge: !0
+    })
+    avai = 1 // true
+        })
+    } // end if
+    else if (lun) {
         DocRef.get().then((doc) => {
-            if (avai) {
-            let login = doc.data().Timestamps.inAvai; // string
-            let a = moment(login, 'HH:mm:ss').get('minute');
-            let b = moment(login, 'HH:mm:ss').get('hours');
-            let c = moment().get('minutes'); //actual time
-            let d = moment().get('hours');
-            //**** ARITHMETIC */
-            let x = a + (b*60)
-            let y = c + (d*60)
-            let z = y - x
-           
-             DocRef.set({
+            let Lunch = doc.data().Timestamps.inLunch; // string
+            let a = moment(Lunch, 'HH:mm:ss').clone().get('minute');
+            let b = moment(Lunch, 'HH:mm:ss').clone().get('hours');
+            let sec = moment(login, 'HH:mm:ss').clone().get('seconds')
+            let c = moment().clone().get('minutes'); //actual time
+            let d = moment().clone().get('hours');
+            let e = moment().clone().get('seconds');
+            let out = moment().clone().format('HH:mm:ss').toString() // this goes to fb
+            console.log('login', ' ', 'min:', a, 'hours:', b, 'sec:',sec)
+    let x = a + (b*60) + (sec/60) // lunch 
+    let y = c + (d*60) + (e/60) // outLunch
+    let z = (y - x).toPrecision(2);
+                console.log('outHH:mm', out)
+                console.log('loginMinutes:',x)
+                console.log('outMinutes:',y)
+        console.log('Lunch:', z);
+            DocRef.set({
                 Total: {
-                    Available: z
+                    Lunch: z
                 },
+                Timestamps: {
+                    outLun: out
+                }
             }, {
                 merge: !0
             })
-            avai = 0
-        } // end if 
-            if(lun) {
-                let Lunch = doc.data().Timestamps.inLunch; // string
-                let a = moment(Lunch, 'HH:mm:ss').get('minute');
-                let b = moment(Lunch, 'HH:mm:ss').get('hours');
-                let c = moment().get('minutes'); //actual time
-                let d = moment().get('hours');
-                //**** ARITHMETIC */
-                let x = a + (b*60)
-                let y = c + (d*60)
-                let z = y - x
-                DocRef.set({
-                    Total: {
-                        Lunch: z
-                    },
-                }, {
-                    merge: !0
-                })
-                lun = 0
-            } // end if
-            if(bre) {
-                let Break = doc.data().Timestamps.inBreak; // string
-                let a = moment(Break, 'HH:mm:ss').get('minute');
-                let b = moment(Break, 'HH:mm:ss').get('hours');
-                let c = moment().get('minutes'); //actual time
-                let d = moment().get('hours');
-                //**** ARITHMETIC */
-                let x = a + (b*60)
-                let y = c + (d*60)
-                let z = y - x
-                DocRef.set({
-                    Total: {
-                        Break: z
-                    },
-                }, {
-                    merge: !0
-                })
-                bre = 0
-            } // end if
-            if(trai) {
-                let Training = doc.data().Timestamps.inTrain; // string
-                let a = moment(Training, 'HH:mm:ss').get('minute');
-                let b = moment(Training, 'HH:mm:ss').get('hours');
-                let c = moment().get('minutes'); //actual time
-                let d = moment().get('hours');
-                //**** ARITHMETIC */
-                let x = a + (b*60)
-                let y = c + (d*60)
-                let z = y - x
-                DocRef.set({
-                    Total: {
-                        Training: z
-                    },
-                }, {
-                    merge: !0
-                })
-                trai = 0 
-            } // end if
-            if(proy) {
-                let Project = doc.data().Timestamps.inProy; // string
-                let a = moment(Project, 'HH:mm:ss').get('minute');
-                let b = moment(Project, 'HH:mm:ss').get('hours');
-                let c = moment().get('minutes'); //actual time
-                let d = moment().get('hours');
-                //**** ARITHMETIC */
-                let x = a + (b*60)
-                let y = c + (d*60)
-                let z = y - x
-                DocRef.set({
-                    Total: {
-                        Project: z
-                    },
-                }, {
-                    merge: !0
-                })
-                proy = 0
-            } // end if
+            lun = 0
+        })
+    } // end if
+    else if (bre) {
+        DocRef.get().then((doc) => {
+            let Break = doc.data().Timestamps.inBreak; // string
+            let a = moment(Break, 'HH:mm:ss').get('minute');
+            let b = moment(Break, 'HH:mm:ss').get('hours');
+            let sec = moment(login, 'HH:mm:ss').clone().get('seconds')
+            let c = moment().clone().get('minutes'); //actual time
+            let d = moment().clone().get('hours');
+            let e = moment().clone().get('seconds');
+            let out = moment().clone().format('HH:mm:ss').toString() // this goes to fb
+            console.log('login', ' ', 'min:', a, 'hours:', b, 'sec:',sec)
+    let x = a + (b*60) + (sec/60) // lunch 
+    let y = c + (d*60) + (e/60) // outLunch
+    let z = (y - x).toPrecision(2);
+                console.log('outHH:mm', out)
+                console.log('loginMinutes:',x)
+                console.log('outMinutes:',y)
+        console.log('Available:', z);
+            DocRef.set({
+                Total: {Break: z},
+                Timestamps: {outBre: out} },{
+                merge: !0
+            })
+            bre = 0  
         })
     }
-        
+    else if (trai) {
+        DocRef.get().then((doc) => {
+        let Training = doc.data().Timestamps.inTrain; // string
+        let a = moment(Training, 'HH:mm:ss').get('minute');
+        let b = moment(Training, 'HH:mm:ss').get('hours');
+        let sec = moment(login, 'HH:mm:ss').clone().get('seconds')
+        let c = moment().clone().get('minutes'); //actual time
+        let d = moment().clone().get('hours');
+        let e = moment().clone().get('seconds');
+        let out = moment().clone().format('HH:mm:ss').toString() // this goes to fb
+        console.log('login', ' ', 'min:', a, 'hours:', b, 'sec:',sec)
+        let x = a + (b*60) + (sec/60) // lunch 
+        let y = c + (d*60) + (e/60) // outLunch
+        let z = (y - x).toPrecision(2);
+                    console.log('outHH:mm', out)
+                    console.log('loginMinutes:',x)
+                    console.log('outMinutes:',y)
+            console.log('Available:', z);
+            DocRef.set({
+                Total: {Training: z},
+                Timestamps: {outTrain: out} },{
+                merge: !0
+            })
+            trai = 0 
+        })
+    } // end if  
+    else if (proy) {
+        let Project = doc.data().Timestamps.inProy; // string
+        let a = moment(Project, 'HH:mm:ss').get('minute');
+        let b = moment(Project, 'HH:mm:ss').get('hours');
+        let sec = moment(login, 'HH:mm:ss').clone().get('seconds')
+        let c = moment().clone().get('minutes'); //actual time
+        let d = moment().clone().get('hours');
+        let e = moment().clone().get('seconds');
+        let out = moment().clone().format('HH:mm:ss').toString() // this goes to fb
+        console.log('login', ' ', 'hours:', b,'min:', a,  'sec:',sec)
+        let x = a + (b*60) + (sec/60) // lunch 
+        let y = c + (d*60) + (e/60) // outLunch
+        let z = (y - x).toPrecision(2);
+                    console.log('outHH:mm', out)
+                    console.log('loginMinutes:',x)
+                    console.log('outMinutes:',y)
+            console.log('Available:', z);
+        DocRef.set({
+            Total: {Project: z},
+            Timestamps: {outBre: out} },{
+            merge: !0
+        })
+        proy = 0
+    }     
+}
+
 function resetTest() {
-    document.getElementsByClassName("timers").innerHTML = "00" + ":" + "00" + ":" + "00";
+    document.getElementsByClassName("timers").innerHTML  = "00" + ":" + "00" + ":" + "00";
+//  active = 0
+//  activeTwo = 0
+//  activeThree = 0
+//  activeFour = 0
+//  activeFive = 0 
     console.log('Reset done');
 }
