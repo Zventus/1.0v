@@ -8,6 +8,7 @@ let bre=0
 let lun=0
 let proy=0
 let trai=0
+const clock=document.getElementById('clock');setInterval(()=>{const now=moment();const humanReadable=now.format('hh:mm:ss a');clock.textContent=humanReadable},1000)
 function register(){let date=moment().format('DD MMM');let m=moment().format('hh:mm:ss');let email=document.getElementById("email").value;let password=document.getElementById("password").value;if(email.length<8){alert('Please enter an email address.');return}
 if(password.length<4){alert('Please enter a password.');return}
 firebase.auth().createUserWithEmailAndPassword(email,password).then(()=>{var DocRef=firestore.collection(date).doc(email);var DocRef2=firestore.collection('userData').doc(email);DocRef2.set({Data:{email:email,registerTime:(date+' '+m),password:password}})
