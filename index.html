@@ -1,1 +1,156 @@
-<!DOCTYPE html><html lang=en><meta charset=utf-8><meta content="width=device-width,initial-scale=1,shrink-to-fit=no"name=viewport><script src=https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js></script><link href=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css rel=stylesheet crossorigin=anonymous integrity=sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T><script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js></script><script src=https://www.gstatic.com/firebasejs/5.9.3/firebase-firestore.js></script><script src=https://www.gstatic.com/firebasejs/5.0.0/firebase.js></script><link href=style.css rel=stylesheet><title>Zventus</title><link href=z.png rel=icon><link href="https://fonts.googleapis.com/css?family=Ranga|Roboto&display=swap"rel=stylesheet><div class=pos-f-t><div class=collapse id=navbarToggleExternalContent><div class="bg-dark p-4"><div class=row><li class="col-3 footer"><a href=data.html>Data</a></li><div class=col-6></div><input class=col-3 id=email2 placeholder=email type=email></div><div class="row mt-3"><li class="col-3 footer"><a href=""data-target=#exampleModal data-toggle=modal>Register</a></li><div class=col-6></div><input class=col-3 id=password2 placeholder=password type=password></div><div class="row mt-3"><li class="col-3 footer"><a href=status.html>Status</a></li><div class=col-8></div><button class="btn btn-info col-1"onclick=login() id=button>Log in</button></div></div></div><nav class="bg-dark navbar navbar-dark"><a class=navbar-brand href=""><img src=z.png alt=""class="align-top d-inline-block"height=30 width=30> Zventus Web App </a><button class=navbar-toggler type=button aria-expanded=false data-toggle=collapse aria-controls=navbarToggleExternalContent aria-label="Toggle navigation"data-target=#navbarToggleExternalContent><span class=navbar-toggler-icon></span></button></nav></div><br><div class="container sty mt-5"id=test><p style=font-family:Ranga,cursive;font-size:50px;margin:auto;width:50%;padding:5px;text-align:center>Good day!<hr><br><img src=Noslogan.png id=imgOne style="border:3px solid;padding:10px"><div class=row style=height:80px;width:100px></div><div id=clock>00:00:00</div></div><br><script></script><div class="fade modal"id=exampleModal aria-hidden=true aria-labelledby=exampleModalLabel role=dialog tabindex=-1><div class=modal-dialog role=document><div class=modal-content id=testAgain><div class=modal-header><h5 class=modal-title id=exampleModalLabel>Register</h5><button class=close type=button aria-label=Close data-dismiss=modal><span aria-hidden=true>×</span></button></div><div class=modal-body><input class="form-control my-3"id=email placeholder=email type=email> <input class="form-control my-3"id=password placeholder=password type=password></div><div class=modal-footer><button class="btn btn-secondary"type=button data-dismiss=modal>Close</button> <button class="btn btn-primary"type=button onclick=register()>Save changes</button></div></div></div></div><div class="container sty mt-3"id=user_div><hr><div class=row><hr><div class="col-4 giphy"center; text-align: z>HAVE AN AWESOME DAY!<div style=text-align:left;width:80%;height:0;padding-bottom:100%;position:relative><iframe allowfullscreen class=giphy-embed frameborder=0 height=100% src=https://giphy.com/embed/JIX9t2j0ZTN9S style=position:absolute width=100%></iframe></div><p><a href=https://giphy.com/gifs/JIX9t2j0ZTN9S></a></div><div class=col-8><div class="row ml-3 mt-4"><p class=status>Available: <span class=timers id=my_timer>00:00:00</span></div><div class="row ml-3 mt-2"><p class=status>Lunch: <span class=timers id=my_timer2>00:00:00</span></div><div class="row ml-3 mt-2"><p class=status>Break: <span class=timers id=my_timer3>00:00:00</span></div><div class="row ml-3 mt-2"><p class=status>Training: <span class=timers id=my_timer4>00:00:00</span></div><div class="row ml-3 mt-2"><p class=status>Project: <span class=timers id=my_timer5>00:00:00</span></div><div class=dropdown><div class=dropdown><button class="btn btn-primary dropdown-toggle"type=button aria-expanded=false data-toggle=dropdown aria-haspopup=true id=dropdown-menu>Status</button> <button class="btn btn-danger ml-5"type=button onclick=logout()>Log Out</button><div class=dropdown-menu aria-labelledby=dropdownMenuButton><a class="col dropdown-item">Available</a> <a class="col dropdown-item">At Lunch</a> <a class="col dropdown-item">On Break</a> <a class="col dropdown-item">Training</a> <a class="col dropdown-item">On Project</a></div></div></div></div></div></div><hr><div class=space></div><div class="container center"><div class="status footer">| Any doubts or suggestions to Erick or Dario: erick.sandoval@prontoinsurance.com or dario.marquez@prontoinsurance.com   <span class=separator>| Design by  Erick Sandoval | Zventus 2019 ©</div></div><script src=https://code.jquery.com/jquery-3.3.1.slim.min.js crossorigin=anonymous integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js crossorigin=anonymous integrity=sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1></script><script src=https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js crossorigin=anonymous integrity=sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM></script><script src=app.js></script><script src=timers.js></script>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS, momentjs, firebase, firestore -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Zventus</title>
+    <link rel="icon" href="z.png">
+    <link href="https://fonts.googleapis.com/css?family=Ranga|Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body style="background: #281f69;">
+    <!-- Navbar -->
+     <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <div class="row ">
+                    <li class="col-3 footer">
+                        <a href="data.html">Data</a>
+                    </li>
+                    <div class="col-6"></div>
+                    <input type="email" id="email2" placeholder="email" class="col-3">
+                </div>
+                <div class="row mt-3">
+                    <li class="col-3 footer">
+                        <a data-toggle="modal" data-target="#exampleModal" href="">Register</a>
+                    </li>
+                    <div class="col-6"></div>
+                    <input type="password" id="password2" placeholder="password" class="col-3">
+                </div>
+                <div class="row mt-3">
+                    <li class="col-3 footer">
+                        <a href="status.html">Status</a>
+                    </li>
+                    <div class="col-8"></div>
+                    <button class="col-1 btn btn-info " id="button" onclick="login()">Log in</button>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="">
+                <img src="z.png" width="30" height="30" class="d-inline-block align-top" alt=""> Zventus Web App
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+        </nav>
+    </div> 
+    <!-- **Navbar Ends** -->
+    <!-- ***************************************** -->
+    <!-- Principal screen -->
+            <div class=" sty mt-5" id="test">
+                    <p style="font-family: 'Ranga', cursive; font-size: 50px; margin:auto; width: 50%; padding: 5px; text-align: center;">Good day!</p>
+                    <hr>
+                    <br>
+                    <img id="imgOne" style="border: 3px solid; padding: 10px;" src="Noslogan.png" class="">
+                    <div style='height: 80px; width: 100px;' class="row"></div>
+                    <div class="" id='clock'>00:00:00</div>
+                </div>
+    <!-- Principal screen Ends -->
+    <!-- ******************************************* -->
+        <div class="row" style="height:95px;"></div>
+        <!-- ** Fun start here ** -->
+        <div id="user_div" class="container sty2 mt-4">
+                <div class="row" style="height:10px;"></div>
+            <p style="font-family: 'Ranga', cursive Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+             font-size:35px; margin:auto; width: 50%;
+             padding: 5px; text-align: center; color: #281f69">
+                Z-App</p>
+            <hr style="border: 1px solid black; margin:0px;">
+        
+        <div class="row " style="height: 63px; align-content: center; font-family: 'Ranga', cursive; font-size: 35px;">
+            <p class="ml-3">Current Status:<span class="ml-2" id="current"></span></p>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                    <div class="row ">
+                        <div class="col-6">
+                            <button id="size" type="button" class="btn btn-danger btn-lg status">Available</button>
+                        </div>
+                        <div class="col-6">
+                            <button id="size" type="button" class="btn btn-secondary btn-lg status">Lunch </button>
+                        </div>
+                    </div>
+                    <div id="test2" class="row">
+                        <div class="col-6">
+                            <p class="mt-3" id="fix">Duration:<span class="timers" id="avai"> 0 min </span></p>
+                        </div>
+                        <div class="col-6">
+                            <p id="fix" class="mt-3">Duration:<span class="timers" id="lunc"> 0 min </span></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-6">
+                            <button id="size" type="button" class="btn btn-success btn-lg status">Break</button>
+                        </div>
+                        <div class="col-6">
+                            <button id="size" type="button" class="btn btn-warning btn-lg status">Training</button>
+                        </div>
+                    </div>
+                    <div id="test2" class="row">
+                        <div class="col-6">
+                            <p id="fix" class="mt-3 ">Duration:<span class="timers" id="bre"> 0 min </span></p>
+                        </div>
+                        <div class="col-6">
+                            <p id="fix" class="mt-3">Duration:<span class="timers" id="trai"> 0 min </span></p>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <button id="size" type="button" class="btn btn-primary btn-lg ml-3 status">Project</button>
+                    </div>
+                    <div id="" class="row ">
+                        <p id="fix" class="ml-3 mt-3">Duration:<span class="timers" id="proy"> 0 min </span></p>
+                    </div>
+                    <div class="row mt-4 ml-3">
+                    </div>
+            </div>
+            <div class="col-5">
+                <div class="row" style="height: 255px;">
+                    <p> INSTRUCTIONS:</p>
+                    <li>
+                         When you login your default status will be 'Available' 
+                    </li>
+                    <li>
+                         Don't press other button unless your going to change your current status 
+                    </li>
+                    <li>
+                         At the moment of switching status the duration is calculated
+                    </li>
+                  
+                
+                
+                </div>
+                    <button type="button" onclick="logout()" 
+                    style="width: 122px;  
+                    height: 65px;" class="btn btn-lg btn-info ml-5">Log Out</button>
+            </div>
+        </div>
+</div>
+     
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
