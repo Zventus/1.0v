@@ -7,7 +7,6 @@ let config = {
     messagingSenderId: "68550919770"
 };
 firebase.initializeApp(config);
-// let db = firebase.firestore();
 const firestore = firebase.firestore();
 let user = firebase.auth().currentUser;
 const settings = {/* your settings... */ timestampsInSnapshots: true};
@@ -17,30 +16,37 @@ window.onload = function () {
     let content = document.getElementById('avai')
     let contentTwo = document.getElementById('lunc')
     let contentThree = document.getElementById('bre')
-    let availableStored = localStorage.getItem("Available");
-    let lunchStored = localStorage.getItem("Lunch");
-    let breakStored = localStorage.getItem("Break");
+    let contentFour = document.getElementById('trai')
+    let contentFive = document.getElementById('proy')
+    let availableStored = localStorage.getItem("Available")
+    let lunchStored = localStorage.getItem("Lunch")
+    let breakStored = localStorage.getItem("Break")
+    let trainingStored = localStorage.getItem('Training')
+    let projectStored = localStorage.getItem('Project')
     content.innerHTML =  ` ${availableStored} min` 
     contentTwo.innerHTML =  ` ${lunchStored} min` 
-    contentThree.innerHTML =  ` ${breakStored} min` 
-    if (avai) { 
+    contentThree.innerHTML =  ` ${breakStored} min`
+    contentFour.innerHTML =  ` ${trainingStored} min`
+    contentFive.innerHTML =  ` ${projectStored} min`
+    // let avai = localStorage.getItem('availableBool')
+    // let lunch = localStorage.getItem('lunchBool ')
+    console.log(avaiTest, lunTest)
+    if (!avaiTest) {// if 0 then run
         current.innerHTML = 'Available'
-    } else if (lun) {
-        console.log('test')
+    } 
+    else if(lunTest) {
         current.innerHTML = 'Lunch'
     }
+    else if(breTest) {
+        current.innerHTML = 'Break'
+    }
+    else if(traiTest) {
+        current.innerHTML = 'Training'
+    }
+    else if(proyTest) {
+        current.innerHTML = 'Project'
+    }
 }
-
-let active = 1
-let activeTwo = 0
-let activeThree = 0
-let activeFour = 0
-let activeFive = 0 
-let avai = 0 // false
-let bre = 0
-let lun = 0
-let proy = 0
-let trai = 0
 
 const clock = document.getElementById('clock');
                         setInterval(() => {
@@ -94,7 +100,6 @@ function register() {
     })
 }
 
-
 function login() {
     let date = moment().format('DD MMM');
     let m = moment().format('HH:mm:ss');
@@ -147,14 +152,12 @@ function login() {
     })
     current.innerHTML = 'Available'
     initial()
-    resetTest()
 }
 
 function logout() {
     console.log('logout');
     let date = moment().format('DD MMM');
     let m = moment().format('hh:mm:ss');
-
     let user = firebase.auth().currentUser;
     let email = user.email;
     let DocRef = firestore.collection(date).doc(email);
@@ -178,6 +181,7 @@ function logout() {
      setTimeout(() => {firebase.auth().signOut()}, 500);
     // setTimeout(resetTest, 250); 
      erase()
+     resetTest()
 } //End logout
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -185,9 +189,7 @@ firebase.auth().onAuthStateChanged((user) => {
         var email = user.email;
         console.log('user:', email);
         document.getElementById("user_div").style.display = "block";
-        document.getElementById("test").style.display = "none";
-        // let current = document.getElementById("current")
-            
+        document.getElementById("test").style.display = "none";            
     } else {
         console.log('No user signed in')
         document.getElementById("user_div").style.display = "none";
@@ -195,6 +197,44 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
+function erase () {
+    console.log('erase test')
+    localStorage.removeItem("Available");
+    localStorage.removeItem("Lunch");
+    localStorage.removeItem("Break");
+    localStorage.removeItem("Training");
+    localStorage.removeItem("Project");
+    localStorage.removeItem("availableBool");
+    localStorage.removeItem("lunchBool");
+    localStorage.removeItem("breakBool");
+    localStorage.removeItem("trainingBool");
+    localStorage.removeItem("projectBool");
+}
+
+function initial () {
+      localStorage.setItem("Available", '0');
+      localStorage.setItem("availableBool", '0');
+      localStorage.setItem("Lunch", '0');
+      localStorage.setItem("lunchBool", '0');
+      localStorage.setItem("Break", '0');
+      localStorage.setItem("breakBool", '0')
+      localStorage.setItem("Training", '0');
+      localStorage.setItem("trainingBool",'0')
+      localStorage.setItem("Project", '0');
+      localStorage.setItem('projectBool','0')
+}
+
+let avai = localStorage.getItem("availableBool")
+let lun = localStorage.getItem("lunchBool")
+let bre = localStorage.getItem('breakBool')
+let trai = localStorage.getItem('trainingBool')
+let proy = localStorage.getItem('projectBool')
+let avaiTest = parseFloat(avai)
+let lunTest = parseFloat(lun)
+let breTest = parseFloat(bre)
+let traiTest = parseFloat(trai)
+let proyTest = parseFloat(proy)
+// console.log(avaiTest, lunTest)
 let current = document.getElementById('current') // status bar
 let status = document.querySelectorAll('button.status').length;
 let date = moment().format('DD MMM');
@@ -207,14 +247,9 @@ for (let i = 0; i < status; i++) {
             let DocRef = firestore.collection(date).doc(email);
             if (i == 0) { // available
                 current.innerHTML = 'Available'
-                substract()
-                  avai = 0 // has to be false              
-                  active = 1
-                  activeTwo = 0
-                  activeThree = 0
-                  activeFour = 0        
-                  activeFive = 0 
-               
+                substract()// saves previous state
+                   avaiTest = 0  // then activate current state
+                   localStorage.setItem("availableBool", avaiTest)            
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -226,12 +261,8 @@ for (let i = 0; i < status; i++) {
             } else if (i == 1) { // lunch
             current.innerHTML = 'Lunch'
                  substract();
-                activeTwo = 1;
-                active = 0;
-                activeThree = 0
-                activeFour = 0
-                activeFive = 0 
-                lun = 1 // lunch is active
+                 lunTest = 1 // lunch is active
+                 localStorage.setItem("lunchBool", lunTest)
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -243,13 +274,8 @@ for (let i = 0; i < status; i++) {
             } else if (i == 2) { // break
                 current.innerHTML = 'Break'
                 substract()
-                bre = 1
-                activeTwo = 0
-                active = 0
-                activeFour = 0
-                activeFive = 0
-                activeThree = 1
-                
+                breTest = 1
+                localStorage.setItem('breakBool', breTest)
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -261,12 +287,8 @@ for (let i = 0; i < status; i++) {
             } else if (i == 3) { // trai
                 current.innerHTML = 'Training'
                 substract()
-                trai = 1
-                activeThree = 0 
-                activeFour = 1
-                active = 0;
-                activeThree = 0
-                activeFive = 0
+                traiTest = 1
+                localStorage.setItem('trainingBool',traiTest)
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -278,13 +300,8 @@ for (let i = 0; i < status; i++) {
             } else if (i == 4) { // project
                 current.innerHTML = 'Project'
                 substract()
-                activeFour = 0
-                active = 0;
-                activeThree = 0
-                activeTwo = 0
-                activeFour = 0
-                activeFive = 1
-                proy = 1
+                proyTest = 1
+                localStorage.setItem('projectBool',proyTest)
                 let newTime = moment().clone().format('HH:mm:ss');
                 DocRef.set({
                     Timestamps: {
@@ -298,29 +315,11 @@ for (let i = 0; i < status; i++) {
     )
 }
 
-function erase () {
-    console.log('erase test')
-    localStorage.removeItem("Available");
-    localStorage.removeItem("Lunch");
-    localStorage.removeItem("Break");
-    localStorage.removeItem("Training");
-    localStorage.removeItem("Project");
-}
-
-function initial () {
-     firstAvai = localStorage.setItem("Available", '0');
-     firstLun = localStorage.setItem("Lunch", '0');
-     firstBrea = localStorage.setItem("Break", '0');
-     firstAvai = localStorage.setItem("Training", '0');
-     firstAvai = localStorage.setItem("Project", '0');
-}
-
-
 function substract () {
     let user = firebase.auth().currentUser;
     let email = user.email;
     let DocRef = firestore.collection(date).doc(email);
-        if(!avai) {
+        if(!avaiTest) {// if avai=0 run this1
             DocRef.get().then((doc) => {
     let login = doc.data().Timestamps.inAvai; // string
     let a = moment(login, 'HH:mm:ss').clone().get('minute'); // login convertion to momentjs
@@ -337,19 +336,18 @@ function substract () {
     let x = a + (b*60) + (sec/60)
     let y = c + (d*60) + (e/60)
     let z = (y - x);
-                console.log('AvaiMinutes:',x)
-                console.log('outAvaiMinutes:',y)
-        console.log('Available:', z);
-        let content = document.getElementById('avai')
-            
+                console.log('inMinutes:',x)
+                console.log('outMinutes:',y)
+        console.log('availableTotal:', z);
+            let content = document.getElementById('avai')
             let availableStored = localStorage.getItem("Available");
             console.log(availableStored);
             let test = parseFloat(availableStored)
             let testDos = parseFloat(z);
             console.log(test, 'and', testDos);
-            let availableNew = (test + testDos).toPrecision(2) 
+            let availableNew = (test + testDos).toPrecision(3) 
             availableNew.toString()
-            content.innerHTML =  ` ${availableNew} min` ;
+            content.innerHTML =  ` ${availableNew} min`;
             localStorage.setItem("Available", availableNew);
             let Available = localStorage.getItem("Available");
             console.log(Available);
@@ -359,10 +357,11 @@ function substract () {
     }, {
         merge: !0
     })
-    avai = 1 // true
+    avaiTest = 1 // true
+    localStorage.setItem("availableBool", avaiTest)
         })
     } // end if
-    else if (lun) {
+    else if (lunTest) {
         DocRef.get().then((doc) => {
             let lunch = doc.data().Timestamps.inLunch; // string
             let a = moment(lunch, 'HH:mm:ss').clone().get('minute');
@@ -387,7 +386,7 @@ function substract () {
         let test = parseFloat(availableStored)
         let testDos = parseFloat(z);
         console.log(test, 'and', testDos);
-        let availableNew =  (test + testDos).toPrecision(2)
+        let availableNew =  (test + testDos).toPrecision(3)
         content.innerHTML =  ` ${availableNew} min` 
         localStorage.setItem("Lunch", availableNew);
         let Available = localStorage.getItem("Lunch");
@@ -402,10 +401,11 @@ function substract () {
             }, {
                 merge: !0
             })
-            lun = 0
+            lunTest = 0
+            localStorage.setItem("lunchBool", lunTest)
         })
     } // end if
-    else if (bre) {
+    else if (breTest) {
         DocRef.get().then((doc) => {
             let Break = doc.data().Timestamps.inBreak; // string
             let a = moment(Break, 'HH:mm:ss').get('minute');
@@ -434,7 +434,6 @@ function substract () {
         localStorage.setItem("Break", availableNew);
         let Available = localStorage.getItem("Break");
         console.log(Available);
-
             DocRef.set({
                 Total: {Break: z},
                 Timestamps: {outBre: out} },{
@@ -442,8 +441,10 @@ function substract () {
             })
             bre = 0  
         })
+        breTest = 0
+            localStorage.setItem("breakBool", breTest)
     }
-    else if (trai) {
+    else if (traiTest) {
         DocRef.get().then((doc) => {
         let Training = doc.data().Timestamps.inTrain; // string
         let a = moment(Training, 'HH:mm:ss').get('minute');
@@ -479,8 +480,10 @@ function substract () {
             })
             trai = 0 
         })
+        traiTest = 0
+        localStorage.setItem("trainingBool", traiTest)
     } // end if  
-    else if (proy) {
+    else if (proyTest) {
         DocRef.get().then((doc) => {
         let Project = doc.data().Timestamps.inProy; // string
         let a = moment(Project, 'HH:mm:ss').get('minute');
@@ -514,7 +517,8 @@ function substract () {
             Timestamps: {outBre: out} },{
             merge: !0
         })
-        proy = 0
+        proyTest = 0
+        localStorage.setItem("trainingBool", proyTest)
     })
     } //else if
     
