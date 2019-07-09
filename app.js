@@ -352,7 +352,7 @@ function substract () {
             let Available = localStorage.getItem("Available");
             console.log(Available);
      DocRef.set({
-        Total: {Available: z},
+        Total: {Available: z=Available},
         Timestamps: {outAvai: out}
     }, {
         merge: !0
@@ -393,7 +393,7 @@ function substract () {
         console.log(Available);
             DocRef.set({
                 Total: {
-                    Lunch: z
+                    Lunch: Available
                 },
                 Timestamps: {
                     outLun: out
@@ -429,13 +429,13 @@ function substract () {
         let test = parseFloat(availableStored)
         let testDos = parseFloat(z);
         console.log(test, 'and', testDos);
-        let availableNew = test + testDos 
+        let availableNew =  (test + testDos).toPrecision(3)
         content.innerHTML =  ` ${availableNew} min` ;
         localStorage.setItem("Break", availableNew);
         let Available = localStorage.getItem("Break");
         console.log(Available);
             DocRef.set({
-                Total: {Break: z},
+                Total: {Break: Available},
                 Timestamps: {outBre: out} },{
                 merge: !0
             })
@@ -468,13 +468,13 @@ function substract () {
             let test = parseFloat(availableStored)
             let testDos = parseFloat(z);
             console.log(test, 'and', testDos);
-            let availableNew = test + testDos 
+            let availableNew =  (test + testDos).toPrecision(3)
             content.innerHTML =  ` ${availableNew} min` ;
             localStorage.setItem("Training", availableNew);
             let Available = localStorage.getItem("Training");
             console.log(Available);
             DocRef.set({
-                Total: {Training: z},
+                Total: {Training: Available},
                 Timestamps: {outTrain: out} },{
                 merge: !0
             })
@@ -507,13 +507,13 @@ function substract () {
             let test = parseFloat(availableStored)
             let testDos = parseFloat(z);
             console.log(test, 'and', testDos);
-            let availableNew =  (test + testDos).toPrecision(2)
+            let availableNew =  (test + testDos).toPrecision(3)
             content.innerHTML =  ` ${availableNew} min` ;
             localStorage.setItem("Project", availableNew);
             let Available = localStorage.getItem("Project");
             console.log(Available);
         DocRef.set({
-            Total: {Project: z},
+            Total: {Project: Available},
             Timestamps: {outBre: out} },{
             merge: !0
         })
