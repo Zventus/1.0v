@@ -12,6 +12,8 @@ let user = firebase.auth().currentUser;
 const settings = {/* your settings... */ timestampsInSnapshots: true};
 firestore.settings(settings);
 
+
+
 window.onload = function () {
     let content = document.getElementById('avai')
     let contentTwo = document.getElementById('lunc')
